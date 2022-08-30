@@ -1,6 +1,7 @@
 import { getActiveElement } from "@testing-library/user-event/dist/utils";
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import Usuario from "./componente/Usuario";
 
 /*
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -9,43 +10,43 @@ root.render(
     <h1>Hola, Mundo</h1>
   </React.StrictMode>
 );
+
+otra forma de poner una función dentro de un botón
+<button onClick={() => alert("Cerramos Sesion")}>
+            Cerrar Sesion
+          </button>
 */
 
-const nombre = "César";
-const color = "green";
-const sesion = true;
-const pais = undefined;
-const amigos = ["fernanda", "carlos", "camila", "fresia"];
-const frutas = ["pera", "manzana", "sandía", "durazno"];
+const App = () => {
+  // useState es una función que cambia el estado global de la variable.
+  // en este caso, la variable es sesion, con valor por defecto true.
+  // cuando cambiemos esta variable a false, la función useState
+  // la reinicia a nivel global, reiniciando a su vez todas las funciones
+  // en donde la variable sesion está involucrada.
+  const [sesion, cambiaEstadoSesion] = useState(true);
 
-const Usuario = () => {
   return (
-    <div>
-      <h1 className="titulo" style={{ color: color }}>
-        Olá, Rio de Janeiro.
-      </h1>
-      <p>{nombre}, Tudo bem com você?</p>
-
-      {pais && <p>Tu eres de {pais} </p>}
-      <ul>
-        {amigos.map((amigo, index) => {
-          return <li key={index}>{amigo} </li>;
-        })}
-      </ul>
-      <p>Tus frutas favoritas</p>
-      <ul>
-        {frutas.map((fruta, indice) => (
-          <li key={indice}> {fruta} </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      {sesion === true ? (
+        <div>
+          <Usuario />
+          <button onClick={() => cambiaEstadoSesion(false)}>
+            Cerrar Sesion
+          </button>
+        </div>
+      ) : (
+        <div>
+          <p>No has Iniciado Sesión</p>
+          <button onClick={() => cambiaEstadoSesion(true)}>
+            Iniciar Sesion
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
-const App = () => {
-  return <>{sesion === true ? <Usuario /> : <p>No has Iniciado Sesión</p>}</>;
-};
-
+ReactDOM.render(<App />, document.getElementById("root"));
 /*
 const verificarSesion = (sesion) => {
   if (sesion === true) {
@@ -55,4 +56,9 @@ const verificarSesion = (sesion) => {
   }
 };
 */
-ReactDOM.render(<App />, document.getElementById("root"));
+
+/*
+  const cerrarSesion = () => {
+    sesion = false;
+    console.log(sesion);
+  }; */
