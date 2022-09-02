@@ -2,6 +2,7 @@ import { getActiveElement } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Usuario from "./componente/Usuario";
+import FormularioInicioSesion from "./componente/FormularioInicioSesion";
 
 /*
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -23,7 +24,7 @@ const App = () => {
   // cuando cambiemos esta variable a false, la función useState
   // la reinicia a nivel global, reiniciando a su vez todas las funciones
   // en donde la variable sesion está involucrada.
-  const [sesion, cambiaEstadoSesion] = useState(true);
+  const [sesion, cambiaEstadoSesion] = useState(false);
 
   return (
     <>
@@ -37,9 +38,12 @@ const App = () => {
       ) : (
         <div>
           <p>No has Iniciado Sesión</p>
+          <FormularioInicioSesion cambiaEstadoSesion={cambiaEstadoSesion} />
+          {/*
           <button onClick={() => cambiaEstadoSesion(true)}>
             Iniciar Sesion
-          </button>
+          </button>{" "}
+            */}
         </div>
       )}
     </>
