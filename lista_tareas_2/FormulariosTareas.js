@@ -9,8 +9,10 @@ const FormularioTareas = () => {
         placeholder="write a way to kill yourself"
       />
       <button type="submit" className="formulario-tareas__boton">
-        Do it
-        <ion-icon name="fish"></ion-icon>
+        <div className="formulario-tareas__icon">
+          Do it
+          <ion-icon name="fish">chopo</ion-icon>
+        </div>
       </button>
     </form>
   );
