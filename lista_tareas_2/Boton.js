@@ -9,10 +9,10 @@ const Boton = ({ cuenta, cambiarCuenta }) => {
   return (
     <div>
       <button onClick={presionarBoton}>
-        No lo toques
+        No toques este botón
         <ion-icon name="alert-circle"></ion-icon>
       </button>
-      <div>Has presionado {cuenta} veces</div>
+      <div>Has ganado {cuenta} monedas de oro</div>
     </div>
   );
 };
