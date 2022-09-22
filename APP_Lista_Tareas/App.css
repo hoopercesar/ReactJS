@@ -134,6 +134,23 @@ ion-icon {
   display: flex;
 }
 
+/*--- --- ICONOS LISTA TAREAS -- -- -- */
+/*FORMULA: .formulario-tareas__icon > ion-icon*/
+
+.lista-tareas__check > ion-icon {
+  margin-right: 20px;
+  font-size: 26px;
+  color: rgb(17, 16, 16);
+}
+
+.lista-tareas__tarea:hover .lista-tareas__edit-close > ion-icon {
+  margin-left: 20px;
+  opacity: 0.5;
+
+  transition: 0.3s ease all;
+  color: rgb(17, 16, 16);
+}
+
 .lista-tareas__icono {
   cursor: pointer;
   font-size: 16px;
