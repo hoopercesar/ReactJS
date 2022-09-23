@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import ListaTareas from "./ListaTareas";
 
-const Tarea = ({ tarea, toggleCompletada }) => {
+const Tarea = ({ tarea, toggleCompletada, editarTarea }) => {
   const [editandoTarea, cambiarEditandoTarea] = useState(false);
   const [nuevaTarea, cambiarNuevaTarea] = useState(tarea.texto);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
     cambiarEditandoTarea(false);
+    editarTarea(tarea.id, nuevaTarea);
   };
 
   console.log(tarea.completado);
@@ -21,9 +22,10 @@ const Tarea = ({ tarea, toggleCompletada }) => {
       </div>
 
       <div className="lista-tareas__texto">
-        {/*estas líneas son un condicional: si editarndoTarea es verdadero
+        {/*estas líneas son un condicional: si editandoTarea es verdadero
         entonces se ejecuta un formulario y se edita la tarea, 
-        pero si es falso que se muestre la tarea simplemente*/}
+        pero si es falso se muestra la tarea simplemente. 
+        OJO que este condicional se activa cuando se presiona el botón*/}
         {editandoTarea ? (
           <form
             action=""
