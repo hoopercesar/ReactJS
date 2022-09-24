@@ -18,13 +18,24 @@ const App = () => {
     },
   ]);
 
+  // estas variables controlan el comportamiento del ícono
+  // que muestra (o no) las tareas que han sido completadas
+  const [mostrarCompletadas, cambiarMostrarCompletadas] = useState(true);
+
   console.log(tareas);
 
   return (
     <div className="contenedor">
-      <Header />
+      <Header
+        mostrarCompletadas={mostrarCompletadas}
+        cambiarMostrarCompletadas={cambiarMostrarCompletadas}
+      />
       <FormularioTareas tareas={tareas} cambiarTareas={cambiarTareas} />
-      <ListaTareas tareas={tareas} cambiarTareas={cambiarTareas} />
+      <ListaTareas
+        tareas={tareas}
+        cambiarTareas={cambiarTareas}
+        mostrarCompletadas={mostrarCompletadas}
+      />
 
       <div>
         <ion-icon name="eye-outline"></ion-icon>
