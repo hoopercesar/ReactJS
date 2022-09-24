@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ListaTareas from "./ListaTareas";
 
-const Tarea = ({ tarea, toggleCompletada, editarTarea }) => {
+const Tarea = ({ tarea, toggleCompletada, editarTarea, borrarTarea }) => {
   const [editandoTarea, cambiarEditandoTarea] = useState(false);
   const [nuevaTarea, cambiarNuevaTarea] = useState(tarea.texto);
 
@@ -51,7 +51,10 @@ const Tarea = ({ tarea, toggleCompletada, editarTarea }) => {
           name="create-outline"
           onClick={() => cambiarEditandoTarea(!editandoTarea)}
         ></ion-icon>
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-icon
+          name="close-outline"
+          onClick={() => borrarTarea(tarea.id)}
+        ></ion-icon>
       </div>
     </li>
   );
