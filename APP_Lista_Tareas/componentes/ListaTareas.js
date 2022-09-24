@@ -1,7 +1,7 @@
 import React from "react";
 import Tarea from "./Tarea";
 
-const ListaTareas = ({ tareas, cambiarTareas }) => {
+const ListaTareas = ({ tareas, cambiarTareas, mostrarCompletadas }) => {
   const toggleCompletada = (id) => {
     cambiarTareas(
       tareas.map((tarea) => {
@@ -43,15 +43,33 @@ const ListaTareas = ({ tareas, cambiarTareas }) => {
     <ul className="lista-tareas">
       {tareas.length > 0 ? (
         tareas.map((tarea) => {
-          return (
-            <Tarea
-              key={tarea.id}
-              tarea={tarea}
-              toggleCompletada={toggleCompletada}
-              editarTarea={editarTarea}
-              borrarTarea={borrarTarea}
-            />
-          ); //<li key={tarea.id}>{tarea.texto}</li>;
+          // si tareasCompletadas es true devolvemos todas las tareas
+          if (mostrarCompletadas) {
+            return (
+              <Tarea
+                key={tarea.id}
+                tarea={tarea}
+                toggleCompletada={toggleCompletada}
+                editarTarea={editarTarea}
+                borrarTarea={borrarTarea}
+              />
+            ); //<li key={tarea.id}>{tarea.texto}</li>;
+            // pero si tareasCompletadas es false devolvemos
+            // sólo las tareas que no están completadas
+          } else if (!tarea.completado) {
+            return (
+              <Tarea
+                key={tarea.id}
+                tarea={tarea}
+                toggleCompletada={toggleCompletada}
+                editarTarea={editarTarea}
+                borrarTarea={borrarTarea}
+              />
+            );
+          }
+          // este return vacío es el que devuelve sólo las tareas que no han
+          // sido completadas.
+          return;
         })
       ) : (
         <div className="lista-tareas__mensaje">"No hay tareas agregadas"</div>
