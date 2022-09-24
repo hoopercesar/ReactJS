@@ -14,7 +14,10 @@ const Header = ({ mostrarCompletadas, cambiarMostrarCompletadas }) => {
           <ion-icon name="eye-off-outline"></ion-icon>
         </button>
       ) : (
-        <button className="header__boton" onClick={() => toggleCompletadas()}>
+        <button
+          className="header__boton"
+          onClick={() => cambiarMostrarCompletadas(!mostrarCompletadas)}
+        >
           Mostrar completadas
           <ion-icon name="eye-outline"></ion-icon>
         </button>
