@@ -3,7 +3,6 @@ import Tarea from "./Tarea";
 
 const ListaTareas = ({ tareas, cambiarTareas }) => {
   const toggleCompletada = (id) => {
-    console.log("ese es el id", id);
     cambiarTareas(
       tareas.map((tarea) => {
         if (tarea.id === id) {
@@ -14,6 +13,8 @@ const ListaTareas = ({ tareas, cambiarTareas }) => {
     );
   };
 
+  // función que permite actualizar tarea con tarea editada
+
   const editarTarea = (id, nuevoTexto) => {
     cambiarTareas(
       tareas.map((tarea) => {
@@ -21,6 +22,19 @@ const ListaTareas = ({ tareas, cambiarTareas }) => {
           return { ...tarea, texto: nuevoTexto };
         }
         return tarea;
+      })
+    );
+  };
+
+  // Función para borrar la tarea con boton borrar
+
+  const borrarTarea = (id) => {
+    cambiarTareas(
+      tareas.filter((tarea) => {
+        if (tarea.id !== id) {
+          return tarea;
+        }
+        return;
       })
     );
   };
@@ -35,6 +49,7 @@ const ListaTareas = ({ tareas, cambiarTareas }) => {
               tarea={tarea}
               toggleCompletada={toggleCompletada}
               editarTarea={editarTarea}
+              borrarTarea={borrarTarea}
             />
           ); //<li key={tarea.id}>{tarea.texto}</li>;
         })
