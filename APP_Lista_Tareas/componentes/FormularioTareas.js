@@ -18,6 +18,7 @@ const FormularioTareas = ({ tareas, cambiarTareas }) => {
         completada: false,
       },
     ]);
+    cambiarInputTarea("");
   };
 
   return (
@@ -32,7 +33,9 @@ const FormularioTareas = ({ tareas, cambiarTareas }) => {
         }}
       />
       <button className="formulario-tareas__boton" type="submit">
-        <ion-icon name="add"></ion-icon>
+        <div className="formulario-tareas__icon">
+          <ion-icon name="add-circle"></ion-icon>
+        </div>
       </button>
     </form>
   );
