@@ -19,14 +19,26 @@ const App = () => {
     localStorage.setItem("tarea", JSON.stringify(tareas));
   }, [tareas]);
 
+  // accedemos a localStorage y comprobamos si mostrarCompletadas es  null
+  let configMostrarCompletadas = "";
+  if (localStorage.getItem("mostrarCompletadas") === null) {
+    configMostrarCompletadas = true;
+  } else {
+    configMostrarCompletadas =
+      localStorage.getItem("mostrarCompletadas") === true;
+  }
+
   // estas variables controlan el comportamiento del ícono
   // que muestra (o no) las tareas que han sido completadas
   // contienen el estado de mostrar tareas completadas
-  const [mostrarCompletadas, cambiarMostrarCompletadas] = useState(true);
+  const [mostrarCompletadas, cambiarMostrarCompletadas] = useState(
+    configMostrarCompletadas
+  );
   // guarda el estado de mostrarcompletadas en localStorage
   useEffect(() => {
     localStorage.setItem("mostrarCompletadas", mostrarCompletadas.toString());
   }, [mostrarCompletadas]);
+  console.log(configMostrarCompletadas);
 
   return (
     <div className="contenedor">
