@@ -1,28 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./componentes/Header";
 import FormularioTareas from "./componentes/FormularioTareas";
 import ListaTareas from "./componentes/ListaTareas";
 
 const App = () => {
-  const [tareas, cambiarTareas] = useState([
-    {
-      id: 1,
-      texto: "comer zapatos",
-      completado: false,
-    },
-    {
-      id: 2,
-      texto: "dormir 20 horas",
-      completado: true,
-    },
-  ]);
+  // obtenemos tareas guardadas de localStorage
+  const tareasGuardadas = localStorage.getItem("tarea")
+    ? JSON.parse(localStorage.getItem("tarea"))
+    : [];
+
+  // establecemos estado de las tareas
+  const [tareas, cambiarTareas] = useState(tareasGuardadas);
+  console.log(tareas);
+
+  // guardamos tareas en localStorage
+  useEffect(() => {
+    localStorage.setItem("tarea", JSON.stringify(tareas));
+  }, [tareas]);
 
   // estas variables controlan el comportamiento del ícono
   // que muestra (o no) las tareas que han sido completadas
+  // contienen el estado de mostrar tareas completadas
   const [mostrarCompletadas, cambiarMostrarCompletadas] = useState(true);
-
-  console.log(tareas);
+  // guarda el estado de mostrarcompletadas en localStorage
+  useEffect(() => {
+    localStorage.setItem("mostrarCompletadas", mostrarCompletadas.toString());
+  }, [mostrarCompletadas]);
 
   return (
     <div className="contenedor">
