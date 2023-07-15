@@ -1,0 +1,13 @@
+.cards {
+  background: rgb(224, 142, 142);
+  padding: 10px;
+  color: aliceblue;
+}
+
+.rojo {
+  background: red;
+}
+
+.verde {
+  background: green;
+}
