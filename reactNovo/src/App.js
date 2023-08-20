@@ -2,12 +2,16 @@ import { Hola } from "./Hola";
 import Product, { BotIcon, Navbar, TruckIcon, UsuarioInfo } from "./Product";
 import { Button, TripIcon, Estilo } from "./Button";
 import { TaskCard, TaskCard2 } from "./Task";
+import "./task.css";
 
 export function App() {
   const lista = ["Tos", "Jaqueca", "Alergia"];
   return (
     <div>
-      <TaskCard />
+      <div className="frame">
+        <TaskCard />
+      </div>
+
       <TripIcon tipo={false} />
       <TaskCard2 />
       <Estilo ready={true} />
