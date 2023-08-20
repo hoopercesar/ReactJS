@@ -3,13 +3,14 @@ import "./task.css";
 // forma 1 de estilizar módulos
 export function TaskCard() {
   const cardStyle = {
-    background: "#202020",
-    color: "#fff",
+    background: "rgb(199, 231, 199)",
+    color: "rgb(4, 128, 4)",
   };
   return (
     <div style={cardStyle}>
-      <h1>Primera tarea</h1>
-      <p>Finalizada</p>
+      <h1>Clinica de Salud</h1>
+      <p>Bienvenido</p>
+      <ion-icon name="medkit"></ion-icon>
     </div>
   );
 }
