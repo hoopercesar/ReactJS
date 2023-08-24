@@ -17,7 +17,7 @@ const App = () => {
     axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((datos) => datos.data)
-      .then((dat) => console.log(dat))
+      .then((dat) => dat.map((d) => d.name))
       .then((jdt) => setJasonData(jdt));
   };
 
@@ -36,7 +36,7 @@ const App = () => {
       <p>{data}</p>
       <button onClick={test()}>Axios</button>
       <TaskList />
-      <div>{jasonData}</div>
+      <div>{jasonData} </div>
       <button onClick={jason()}>Datos</button>
     </div>
   );
