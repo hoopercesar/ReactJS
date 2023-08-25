@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const App = () => {
   const [data, setData] = useState();
-  const [jasonData, setJasonData] = useState();
 
   const test = () => {
     axios
@@ -13,12 +12,22 @@ const App = () => {
       .then((dato) => setData(dato));
   };
 
+  const info = {
+    sender: "test_user",
+    // message: "20502458-1",
+    message: "hola",
+  };
   const jason = () => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((datos) => datos.data)
-      .then((dat) => dat.map((d) => d.name))
-      .then((jdt) => setJasonData(jdt));
+      .post("http://localhost:5005/webhooks/rest/webhook", info)
+      .then((response) => {
+        if (response) {
+          console.log(response.data);
+        } else {
+          console.log("NO hay info");
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -36,8 +45,8 @@ const App = () => {
       <p>{data}</p>
       <button onClick={test()}>Axios</button>
       <TaskList />
-      <div>{jasonData} </div>
-      <button onClick={jason()}>Datos</button>
+
+      <button onClick={jason()}>POST</button>
     </div>
   );
 };
