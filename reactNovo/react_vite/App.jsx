@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const App = () => {
   const [data, setData] = useState();
+  const [respuesta, setRespuesta] = useState();
 
   const test = () => {
     axios
@@ -15,14 +16,15 @@ const App = () => {
   const info = {
     sender: "test_user",
     // message: "20502458-1",
-    message: "hola",
+    message: "8291686-5",
   };
   const jason = () => {
     axios
       .post("http://localhost:5005/webhooks/rest/webhook", info)
       .then((response) => {
         if (response) {
-          console.log(response.data);
+          console.log(response.data[0].text);
+          setRespuesta(response.data[0].text);
         } else {
           console.log("NO hay info");
         }
@@ -47,6 +49,7 @@ const App = () => {
       <TaskList />
 
       <button onClick={jason()}>POST</button>
+      <p>{respuesta}</p>
     </div>
   );
 };
