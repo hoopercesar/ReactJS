@@ -1,4 +1,5 @@
 import TaskList from "./TaskList.jsx";
+import { TaskForm } from "./TaskForm.jsx";
 import axios from "axios";
 import { useState } from "react";
 
@@ -16,7 +17,7 @@ const App = () => {
   const info = {
     sender: "test_user",
     // message: "20502458-1",
-    message: "8291686-5",
+    message: "/restart",
   };
   const jason = () => {
     axios
@@ -25,8 +26,6 @@ const App = () => {
         if (response) {
           console.log(response.data[0].text);
           setRespuesta(response.data[0].text);
-        } else {
-          console.log("NO hay info");
         }
       })
       .catch((error) => console.log(error));
@@ -47,6 +46,7 @@ const App = () => {
       <p>{data}</p>
       <button onClick={test()}>Axios</button>
       <TaskList />
+      <TaskForm />
 
       <button onClick={jason()}>POST</button>
       <p>{respuesta}</p>
