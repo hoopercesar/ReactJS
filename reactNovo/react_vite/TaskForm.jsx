@@ -1,11 +1,10 @@
 import { useState } from "react";
 
-export const TaskForm = () => {
+export const TaskForm = ({ props }) => {
   const [texto, setTexto] = useState("");
 
   return (
     <form>
-      <p>{texto}</p>
       <input
         placeholder="ingresa tu mensaje"
         onChange={(ev) => {
@@ -13,6 +12,7 @@ export const TaskForm = () => {
           setTexto(ev.target.value);
         }}
       ></input>
+      <p>{texto}</p>
       <button>Enviar</button>
     </form>
   );
