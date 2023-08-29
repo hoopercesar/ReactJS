@@ -1,39 +1,19 @@
 import TaskList from "./TaskList.jsx";
 import { TaskForm } from "./TaskForm.jsx";
-import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { tasks as data } from "./tasks.js";
 
 const App = () => {
-  const [data, setData] = useState();
-  const [respuesta, setRespuesta] = useState();
+  const [tasks, setTasks] = useState([]);
 
-  const test = () => {
-    axios
-      .get("http://localhost:5005")
-      .then((algo) => algo.data)
-      .then((dato) => setData(dato));
-  };
-
-  const info = {
-    sender: "test_user",
-    // message: "20502458-1",
-    message: "/restart",
-  };
-  const jason = () => {
-    axios
-      .post("http://localhost:5005/webhooks/rest/webhook", info)
-      .then((response) => {
-        if (response) {
-          console.log(response.data[0].text);
-          setRespuesta(response.data[0].text);
-        }
-      })
-      .catch((error) => console.log(error));
-  };
-
+  useEffect(() => {
+    setTasks(data);
+  }, []);
   return (
-    <div>
-      <button
+    <>
+      <TaskForm />
+      <TaskList tasks={tasks} />
+      {/* <button
         onClick={() => {
           fetch("http://localhost:5005")
             .then((response) => response.json())
@@ -42,15 +22,8 @@ const App = () => {
         }}
       >
         Fetch
-      </button>
-      <p>{data}</p>
-      <button onClick={test()}>Axios</button>
-      <TaskList />
-      <TaskForm />
-
-      <button onClick={jason()}>POST</button>
-      <p>{respuesta}</p>
-    </div>
+      </button> */}
+    </>
   );
 };
 
