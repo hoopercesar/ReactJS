@@ -1,26 +1,29 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 function TaskAxios(props) {
   const [mensaje, setMensaje] = useState("");
+  const [userChat, setUserChat] = useState("");
+
+  setUserChat(props.userChat);
 
   const userMessage = {
     sender: "test_user",
-    message: props.userChat,
+    message: userChat,
   };
 
   console.log(userMessage);
 
-  // axios
-  //   .post("http://localhost:5005/webhooks/rest/webhook", userMessage)
-  //   .then((response) => {
-  //     if (response) {
-  //       // console.log(response.data[0].text);
-  //       setMensaje(response.data[0].text);
-  //     }
-  //   })
-  //   .catch((error) => console.log(error));
+  axios
+    .get("http://localhost:5005/webhooks/rest/webhook", userMessage)
+    .then((response) => {
+      if (response) {
+        // console.log(response.data[0].text);
+        setMensaje(response.data);
+      }
+    })
+    .catch((error) => console.log(error));
 
   return (
     <>
