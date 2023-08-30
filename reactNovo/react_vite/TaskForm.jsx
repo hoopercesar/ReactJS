@@ -1,35 +1,55 @@
-import { useState } from "react";
-import TaskAxios from "./TaskAxios";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export const TaskForm = () => {
   const [chatUser, setChatUser] = useState("");
-  const [counter, setCounter] = useState(0);
+  const [botChat, setBotChat] = useState("");
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    setCounter(counter + 1);
   };
 
   const handleInputChange = (ev) => {
     setChatUser(ev.target.value);
   };
 
-  const handleButton = (ev) => {
-    console.log("Enviar", ev.target.value);
+  // Axios
+  const userMessage = {
+    sender: "test_user",
+    message: "hola",
   };
+
+  console.log(userMessage);
+
+  const url = "http://localhost:5005/webhooks/rest/webhook";
+
+  // useEffect(() => {
+  //   axios.get(url).then((response) => setBotChat(response.data));
+  // }, []);
+
+  function createPost() {
+    axios
+      .post(url, userMessage)
+      .then((response) => {
+        setBotChat(response.data);
+        console.log(botChat);
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <>
       {" "}
       <form onSubmit={handleSubmit}>
+        <div>{chatUser}</div>
+        <p>BotChat</p>
         <input
           placeholder="ingresa tu mensaje"
-          onChange={handleInputChange}
+          onBlur={handleInputChange}
         ></input>
-        <div>{chatUser}</div>
-        <button onSubmit={handleButton}>Enviar</button>
+
+        <button onClick={createPost}>Enviar</button>
       </form>
-      <TaskAxios userChat={chatUser} />
     </>
   );
 };
