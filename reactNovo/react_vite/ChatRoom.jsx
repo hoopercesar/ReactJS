@@ -1,43 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function Chat() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState("");
   const [newMessage, setNewMessage] = useState("");
 
   const url = "http://localhost:5005/webhooks/rest/webhook";
 
-  useEffect(() => {
-    // Realizar una solicitud a la base de datos para obtener mensajes
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url).then((response) => {
-          console.log("GET", response.data);
-          setMessages(response.data);
-        });
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  console.log(newMessage);
-
-  const handleSendMessage = () => {
-    // Enviar el nuevo mensaje a la base de datos
-    axios
-      .post(url, { sender: "test_user", message: newMessage })
-      .then((response) => {
-        // Actualizar los mensajes con el nuevo mensaje
-        setMessages([...messages, response.data]);
-        setNewMessage("");
-      })
-      .catch((error) => {
-        console.error("Error al enviar mensaje:", error);
-      });
+  const mensaje = {
+    sender: "test",
+    message: "hola",
   };
+
+  console.log(mensaje);
+
+  // no ip clave
+  // WWJRZ7fvZ*vafzq
+
+  axios
+    .post(url, mensaje)
+    .then((response) => {
+      console.log(response.data);
+      // Actualizar los mensajes con el nuevo mensa
+    })
+    .catch((error) => {
+      console.error("Error al enviar mensaje:", error);
+    });
 
   return (
     <div>
@@ -49,9 +37,9 @@ function Chat() {
       <input
         type="text"
         value={newMessage}
-        onBlur={(e) => setNewMessage(e.target.value)}
+        onChange={(e) => setNewMessage(e.target.value)}
       />
-      <button onClick={handleSendMessage}>Enviar</button>
+      <button>Enviar</button>
     </div>
   );
 }
