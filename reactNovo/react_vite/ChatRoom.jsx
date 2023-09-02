@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 
 function Chat() {
-  const [messages, setMessages] = useState("");
   const [newMessage, setNewMessage] = useState("");
 
   const url = "http://localhost:5005/webhooks/rest/webhook";
@@ -11,7 +10,6 @@ function Chat() {
     sender: "test",
     message: "hola",
   };
-
   console.log(mensaje);
 
   // no ip clave
@@ -29,11 +27,6 @@ function Chat() {
 
   return (
     <div>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>{message.text}</div>
-        ))}
-      </div>
       <input
         type="text"
         value={newMessage}
