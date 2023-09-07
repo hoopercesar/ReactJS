@@ -1,11 +1,19 @@
+import posts from "./data/post";
+import { NavLink } from "react-router-dom";
+
 function Especialidades() {
+  console.log(posts);
   return (
     <div>
       <h2>Especialidades</h2>
       <ul>
-        <li>Broncopulmonar</li>
-        <li>Dermatología</li>
-        <li>Radiología</li>
+        {posts.map((post) => {
+          return (
+            <li key={post.id}>
+              <NavLink to={`/post/${post.id}`}> {post.titulo} </NavLink>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
