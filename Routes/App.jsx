@@ -1,57 +1,44 @@
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Servicios from "./Servicios";
+import Especialidades from "./Especialidades";
+import Tratamientos from "./Tratamientos";
+import Header from "./Header";
+import styled from "styled-components";
+import Post from "./Post";
+import Error404 from "./Error404";
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <header>
-          <h1>Clinica de Salud</h1>
-          <nav>
-            <NavLink to="/">Servicios</NavLink>
-            <NavLink to="/especialidades">Especialidades</NavLink>
-            <NavLink to="/tratamientos">Tratamientos</NavLink>
-          </nav>
-        </header>
-        <main>
+      <ContenedorPrincipal>
+        <Header />
+        <Main>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <div>
-                  <h2>Servicios</h2>
-                  <p>Aquí encontrará todos nuestros servicios</p>
-                </div>
-              }
-            />
+            <Route path="*" element={<Error404 />} />
+            <Route path="/" element={<Servicios />} />
 
-            <Route
-              path="/especialidades"
-              element={
-                <div>
-                  <h2>Especialidades</h2>
-                  <ul>
-                    <li>Broncopulmonar</li>
-                    <li>Dermatología</li>
-                    <li>Radiología</li>
-                  </ul>
-                </div>
-              }
-            />
+            <Route path="/especialidades" element={<Especialidades />} />
+            <Route path="/post/:id" element={<Post />} />
 
-            <Route
-              path="/tratamientos"
-              element={
-                <div>
-                  <h2>Tratamientos</h2>
-                  <p>Estos son los tratamientos</p>
-                </div>
-              }
-            />
+            <Route path="/tratamientos" element={<Tratamientos />} />
           </Routes>
-        </main>
-      </div>
+        </Main>
+      </ContenedorPrincipal>
     </BrowserRouter>
   );
 }
+
+const ContenedorPrincipal = styled.div`
+  padding: 40px;
+  width: 90%;
+  max-width: 700px;
+`;
+
+const Main = styled.main`
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(129, 129, 129, 0.1);
+`;
 
 export default App;
