@@ -2,7 +2,6 @@ import posts from "./data/post";
 import { NavLink } from "react-router-dom";
 
 function Especialidades() {
-  console.log(posts);
   return (
     <div>
       <h2>Especialidades</h2>
