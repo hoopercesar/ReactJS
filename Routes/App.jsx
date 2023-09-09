@@ -6,6 +6,8 @@ import Header from "./Header";
 import styled from "styled-components";
 import Post from "./Post";
 import Error404 from "./Error404";
+import Neurologia from "./Neurologia";
+import NeuralDisease from "./NeuralDisease";
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
             <Route path="/post/:id" element={<Post />} />
 
             <Route path="/tratamientos" element={<Tratamientos />} />
+
+            <Route path="/neurologia" element={<Neurologia />} />
+            <Route path="/neurologia/:id" element={<NeuralDisease />} />
           </Routes>
         </Main>
       </ContenedorPrincipal>
