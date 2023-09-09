@@ -6,7 +6,7 @@ function Post() {
   // Navigate redirecciona hacia la pagina a otra dirección
   const { id } = useParams();
 
-  console.log(id);
+  console.log(useParams());
   return (
     <>
       {posts[id - 1] ? (
