@@ -1,11 +1,23 @@
 import styled from "styled-components";
 import { NavLink, BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Inicio from "./Componentes/Inicio";
 import Blog from "./Componentes/Blog";
 import Tienda from "./Componentes/Tienda";
 import Error404 from "./Componentes/Error404";
+import Carrito from "./Componentes/Carrito";
 
 const App = () => {
+  const productos = [
+    { id: 1, nombre: "manzana" },
+    { id: 2, nombre: "producto 2" },
+    { id: 3, nombre: "producto 3" },
+    { id: 4, nombre: "producto 4" },
+    { id: 5, nombre: "producto 5" },
+    { id: 6, nombre: "producto 6" },
+  ];
+
+  const [carrito, setCarrito] = useState([]);
   return (
     <BrowserRouter>
       {" "}
@@ -21,10 +33,12 @@ const App = () => {
             <Route path="*" element={<Error404 />} />
             <Route path="/" element={<Inicio />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/tienda" element={<Tienda />} />
+            <Route path="/tienda" element={<Tienda productos={productos} />} />
           </Routes>
         </main>
-        <aside>SideBar</aside>
+        <aside>
+          <Carrito carrito={carrito} />
+        </aside>
       </Contenedor>
     </BrowserRouter>
   );
