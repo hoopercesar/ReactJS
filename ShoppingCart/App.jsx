@@ -18,6 +18,60 @@ const App = () => {
   ];
 
   const [carrito, setCarrito] = useState([]);
+
+  const eliminarUnaUnidadCarrito = (id, nombre) => {
+    console.log("estas eliminando una unidad de ", nombre);
+  };
+
+  const agregarProductoCarrito = (id, nombre) => {
+    // si el carrito no tiene elementos agregamos 1
+    if (carrito.length === 0) {
+      setCarrito([{ id: id, nombre: nombre, cantidad: 1 }]);
+    } else {
+      // primero debemos revisar si el producto está o no en el carrito
+      // si el carrito ya tiene el producto, entonces debemos actualizar la cantidad
+      // si no tiene el producto, entonces debemos agregar el producto
+      // para poder editar el arreglo carrito tenemos que clorarlo
+      const nuevoCarrito = [...carrito];
+
+      // comprobamos si nuevocarrito ya tiene el id del producto que deseamos agregar
+      const estaEnCarrito =
+        nuevoCarrito.filter((elemento) => {
+          // retorna el id si está en nuevocarrito.
+
+          return elemento.id === id;
+        }).length > 0;
+      // length>0 : true si hay elementos, false si no hay elementos en estaEnCarrito
+      // estaEnCarrito puede tomar valor true o false, sólo éso
+      // let u = [1, 2, 3]  --> u.length>0 --> true
+
+      // si ya tiene el producto, debemos actualizar la cantidad
+      if (estaEnCarrito) {
+        // para ello tenemos que buscar y obtener la posición del producto en el arreglo nuevoCarrito
+        // y en base a su posición actualizamos el valor
+        nuevoCarrito.forEach((elementoCarrito, index) => {
+          if (elementoCarrito.id === id) {
+            const cant = nuevoCarrito[index].cantidad;
+            console.log("APP51", index, cant);
+            nuevoCarrito[index] = {
+              id: id,
+              nombre: nombre,
+              cantidad: cant + 1,
+            };
+          }
+        });
+      } else {
+        nuevoCarrito.push({
+          id: id,
+          nombre: nombre,
+          cantidad: 1,
+        });
+      }
+      // actualizamos el contenido de carrito
+      setCarrito(nuevoCarrito);
+    }
+  };
+
   return (
     <BrowserRouter>
       {" "}
@@ -33,11 +87,22 @@ const App = () => {
             <Route path="*" element={<Error404 />} />
             <Route path="/" element={<Inicio />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/tienda" element={<Tienda productos={productos} />} />
+            <Route
+              path="/tienda"
+              element={
+                <Tienda
+                  productos={productos}
+                  agregarProductoCarrito={agregarProductoCarrito}
+                />
+              }
+            />
           </Routes>
         </main>
         <aside>
-          <Carrito carrito={carrito} />
+          <Carrito
+            carrito={carrito}
+            eliminarUnaUnidadCarrito={eliminarUnaUnidadCarrito}
+          />
         </aside>
       </Contenedor>
     </BrowserRouter>
