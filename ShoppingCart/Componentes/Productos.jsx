@@ -1,20 +1,24 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { BsCart4 } from "react-icons/Bs";
 
-function Productos({ productos }) {
+function Productos({ productos, agregarProductoCarrito }) {
   return (
     <div>
       <h3>Productos</h3>
-      <BsCart4 />
+
       <ContenedorProductos>
         {productos.map((producto, index) => {
-          console.log(index);
           return (
             <div key={index}>
               <Producto>
                 <p>{producto.nombre} </p>
-                <Boton>Agregar al carrito</Boton>
+                <Boton
+                  onClick={() =>
+                    agregarProductoCarrito(producto.id, producto.nombre)
+                  }
+                >
+                  Agregar al carrito
+                </Boton>
               </Producto>
             </div>
           );
