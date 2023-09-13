@@ -9,18 +9,53 @@ import Carrito from "./Componentes/Carrito";
 
 const App = () => {
   const productos = [
-    { id: 1, nombre: "manzana" },
-    { id: 2, nombre: "producto 2" },
-    { id: 3, nombre: "producto 3" },
-    { id: 4, nombre: "producto 4" },
-    { id: 5, nombre: "producto 5" },
-    { id: 6, nombre: "producto 6" },
+    { id: 1, nombre: "manzana", precio: 500 },
+    { id: 2, nombre: "peras", precio: 700 },
+    { id: 3, nombre: "frijoles", precio: 1500 },
+    { id: 4, nombre: "papas", precio: 5000 },
+    { id: 5, nombre: "aceite", precio: 4500 },
+    { id: 6, nombre: "bananas", precio: 900 },
   ];
 
   const [carrito, setCarrito] = useState([]);
 
+  const calculaTotal = () => {
+    if (carrito.length > 0) {
+      console.log("estás calculando el total");
+    }
+  };
+
+  const eliminarProducto = (id, nombre) => {
+    let algo = [];
+    if (carrito.length > 0) {
+      let clonCarrito = [...carrito];
+      algo = clonCarrito.filter((elemento) => elemento.id != id);
+      console.log(algo);
+    }
+    setCarrito(algo);
+  };
+
   const eliminarUnaUnidadCarrito = (id, nombre) => {
-    console.log("estas eliminando una unidad de ", nombre);
+    const nuevoCarrito = [...carrito];
+
+    // primero buscamos el producto al que se desea restar cantidad
+    const [objetoCarrito] = nuevoCarrito.filter((elemento) => {
+      return elemento.id === id;
+    });
+
+    if (objetoCarrito.cantidad > 0) {
+      nuevoCarrito.forEach((elemento, index) => {
+        if (elemento.id === id) {
+          const cant = nuevoCarrito[index].cantidad;
+          nuevoCarrito[index] = {
+            id: id,
+            nombre: nombre,
+            cantidad: cant - 1,
+          };
+        }
+      });
+    }
+    setCarrito(nuevoCarrito);
   };
 
   const agregarProductoCarrito = (id, nombre) => {
@@ -52,7 +87,7 @@ const App = () => {
         nuevoCarrito.forEach((elementoCarrito, index) => {
           if (elementoCarrito.id === id) {
             const cant = nuevoCarrito[index].cantidad;
-            console.log("APP51", index, cant);
+
             nuevoCarrito[index] = {
               id: id,
               nombre: nombre,
@@ -102,6 +137,8 @@ const App = () => {
           <Carrito
             carrito={carrito}
             eliminarUnaUnidadCarrito={eliminarUnaUnidadCarrito}
+            eliminarProducto={eliminarProducto}
+            calculaTotal={calculaTotal}
           />
         </aside>
       </Contenedor>
