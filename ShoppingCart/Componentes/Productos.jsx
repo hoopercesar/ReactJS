@@ -18,6 +18,7 @@ function Productos({ productos, agregarProductoCarrito }) {
                   }
                 >
                   Agregar al carrito
+                  <p>${producto.precio} </p>
                 </Boton>
               </Producto>
             </div>
@@ -29,7 +30,8 @@ function Productos({ productos, agregarProductoCarrito }) {
 }
 
 Productos.propTypes = {
-  productos: PropTypes.object,
+  productos: PropTypes.array,
+  agregarProductoCarrito: PropTypes.func,
 };
 
 const ContenedorProductos = styled.div`
