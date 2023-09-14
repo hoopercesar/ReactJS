@@ -19,10 +19,12 @@ const App = () => {
 
   const [carrito, setCarrito] = useState([]);
 
-  const calculaTotal = () => {
-    if (carrito.length > 0) {
-      console.log("estás calculando el total");
-    }
+  const retornaPrecioProducto = (id) => {
+    const producto = productos.filter((elemento) => {
+      return elemento.id === id;
+    });
+
+    return producto;
   };
 
   const eliminarProducto = (id, nombre) => {
@@ -30,7 +32,6 @@ const App = () => {
     if (carrito.length > 0) {
       let clonCarrito = [...carrito];
       algo = clonCarrito.filter((elemento) => elemento.id != id);
-      console.log(algo);
     }
     setCarrito(algo);
   };
@@ -59,6 +60,8 @@ const App = () => {
   };
 
   const agregarProductoCarrito = (id, nombre) => {
+    let [precio] = retornaPrecioProducto(id);
+
     // si el carrito no tiene elementos agregamos 1
     if (carrito.length === 0) {
       setCarrito([{ id: id, nombre: nombre, cantidad: 1 }]);
@@ -92,6 +95,7 @@ const App = () => {
               id: id,
               nombre: nombre,
               cantidad: cant + 1,
+              precio: precio.precio,
             };
           }
         });
@@ -100,10 +104,12 @@ const App = () => {
           id: id,
           nombre: nombre,
           cantidad: 1,
+          precio: precio.precio,
         });
       }
       // actualizamos el contenido de carrito
       setCarrito(nuevoCarrito);
+      console.log("APP112-CARRITO", carrito);
     }
   };
 
@@ -138,7 +144,6 @@ const App = () => {
             carrito={carrito}
             eliminarUnaUnidadCarrito={eliminarUnaUnidadCarrito}
             eliminarProducto={eliminarProducto}
-            calculaTotal={calculaTotal}
           />
         </aside>
       </Contenedor>
