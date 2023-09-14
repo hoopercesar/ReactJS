@@ -5,12 +5,7 @@ import { RiDeleteBinLine } from "react-icons/Ri";
 import PropTypes from "prop-types";
 import Total from "./Total";
 
-function Carrito({
-  carrito,
-  eliminarUnaUnidadCarrito,
-  eliminarProducto,
-  calculaTotal,
-}) {
+function Carrito({ carrito, eliminarUnaUnidadCarrito, eliminarProducto }) {
   return (
     <div>
       <h3>
@@ -39,8 +34,6 @@ function Carrito({
           <p>No hay nada en el carrito</p>
         )}
         <Total carrito={carrito} />
-
-        <button onClick={() => calculaTotal()}>Total: </button>
       </div>
     </div>
   );
@@ -50,7 +43,6 @@ Carrito.propTypes = {
   carrito: PropTypes.array,
   eliminarUnaUnidadCarrito: PropTypes.func,
   eliminarProducto: PropTypes.func,
-  calculaTotal: PropTypes.func,
 };
 
 const Producto = styled.div`
