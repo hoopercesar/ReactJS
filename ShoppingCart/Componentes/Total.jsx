@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
+import { NavLink, BrowserRouter } from "react-router-dom";
 
 function Total({ carrito }) {
+  console.log("TOTAL", carrito);
   let total = 0;
   if (carrito.length > 0) {
-    console.log("Total-10", total);
     carrito.forEach((element) => {
+      // console.log(element.cantidad, element.precio);
       total += element.cantidad * element.precio;
     });
-    return total;
+    // return total;
   }
 
-  return <div>Aquí va el Total: {total} </div>;
+  return <div>Total: ${total}</div>;
 }
 
 Total.propTypes = {
