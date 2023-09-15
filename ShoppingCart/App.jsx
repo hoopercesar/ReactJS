@@ -6,6 +6,7 @@ import Blog from "./Componentes/Blog";
 import Tienda from "./Componentes/Tienda";
 import Error404 from "./Componentes/Error404";
 import Carrito from "./Componentes/Carrito";
+import GeneraBoleta from "./Componentes/GeneraBoleta";
 
 const App = () => {
   const productos = [
@@ -38,6 +39,7 @@ const App = () => {
 
   const eliminarUnaUnidadCarrito = (id, nombre) => {
     const nuevoCarrito = [...carrito];
+    let [precio] = retornaPrecioProducto(id);
 
     // primero buscamos el producto al que se desea restar cantidad
     const [objetoCarrito] = nuevoCarrito.filter((elemento) => {
@@ -52,6 +54,7 @@ const App = () => {
             id: id,
             nombre: nombre,
             cantidad: cant - 1,
+            precio: precio.precio,
           };
         }
       });
@@ -64,7 +67,9 @@ const App = () => {
 
     // si el carrito no tiene elementos agregamos 1
     if (carrito.length === 0) {
-      setCarrito([{ id: id, nombre: nombre, cantidad: 1 }]);
+      setCarrito([
+        { id: id, nombre: nombre, cantidad: 1, precio: precio.precio },
+      ]);
     } else {
       // primero debemos revisar si el producto está o no en el carrito
       // si el carrito ya tiene el producto, entonces debemos actualizar la cantidad
@@ -109,7 +114,6 @@ const App = () => {
       }
       // actualizamos el contenido de carrito
       setCarrito(nuevoCarrito);
-      console.log("APP112-CARRITO", carrito);
     }
   };
 
@@ -137,6 +141,7 @@ const App = () => {
                 />
               }
             />
+            <Route path="boleta" element={<GeneraBoleta />} />
           </Routes>
         </main>
         <aside>
