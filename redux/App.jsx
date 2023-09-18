@@ -7,6 +7,9 @@ import Tienda from "./Componentes/Tienda";
 import Error404 from "./Componentes/Error404";
 import Carrito from "./Componentes/Carrito";
 import GeneraBoleta from "./Componentes/GeneraBoleta";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducers/tiendaReducer";
 
 const App = () => {
   const productos = [
@@ -20,6 +23,9 @@ const App = () => {
 
   const [carrito, setCarrito] = useState([]);
 
+  const store = createStore(reducer);
+  console.log("STORE", store.getState());
+
   const retornaPrecioProducto = (id) => {
     const producto = productos.filter((elemento) => {
       return elemento.id === id;
@@ -28,7 +34,7 @@ const App = () => {
     return producto;
   };
 
-  const eliminarProducto = (id, nombre) => {
+  const eliminarProducto = (id) => {
     let algo = [];
     if (carrito.length > 0) {
       let clonCarrito = [...carrito];
@@ -118,38 +124,40 @@ const App = () => {
   };
 
   return (
-    <Contenedor>
-      <Menu>
-        {" "}
-        <NavLink to="/">Inicio</NavLink>
-        <NavLink to="/blog">Blog</NavLink>
-        <NavLink to="/tienda">Tienda</NavLink>
-      </Menu>
-      <main>
-        <Routes>
-          <Route path="*" element={<Error404 />} />
-          <Route path="/" element={<Inicio />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route
-            path="/tienda"
-            element={
-              <Tienda
-                productos={productos}
-                agregarProductoCarrito={agregarProductoCarrito}
-              />
-            }
+    <Provider store={store}>
+      <Contenedor>
+        <Menu>
+          {" "}
+          <NavLink to="/">Inicio</NavLink>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/tienda">Tienda</NavLink>
+        </Menu>
+        <main>
+          <Routes>
+            <Route path="*" element={<Error404 />} />
+            <Route path="/" element={<Inicio />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route
+              path="/tienda"
+              element={
+                <Tienda
+                  productos={productos}
+                  agregarProductoCarrito={agregarProductoCarrito}
+                />
+              }
+            />
+            <Route path="boleta" element={<GeneraBoleta />} />
+          </Routes>
+        </main>
+        <aside>
+          <Carrito
+            carrito={carrito}
+            eliminarUnaUnidadCarrito={eliminarUnaUnidadCarrito}
+            eliminarProducto={eliminarProducto}
           />
-          <Route path="boleta" element={<GeneraBoleta />} />
-        </Routes>
-      </main>
-      <aside>
-        <Carrito
-          carrito={carrito}
-          eliminarUnaUnidadCarrito={eliminarUnaUnidadCarrito}
-          eliminarProducto={eliminarProducto}
-        />
-      </aside>
-    </Contenedor>
+        </aside>
+      </Contenedor>
+    </Provider>
   );
 };
 
