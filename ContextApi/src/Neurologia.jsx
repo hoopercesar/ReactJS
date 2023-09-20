@@ -1,5 +1,6 @@
 import neuralDisease from "./data/neurological";
 import { NavLink } from "react-router-dom";
+import Controles from "./Controles";
 
 function Neurologia() {
   return (
@@ -14,6 +15,7 @@ function Neurologia() {
           );
         })}
       </ul>
+      <Controles />
     </div>
   );
 }
