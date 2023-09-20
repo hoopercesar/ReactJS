@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useContext } from "react";
 import Servicios from "./Servicios";
 import Especialidades from "./Especialidades";
 import Tratamientos from "./Tratamientos";
@@ -8,13 +9,16 @@ import Post from "./Post";
 import Error404 from "./Error404";
 import Neurologia from "./Neurologia";
 import NeuralDisease from "./NeuralDisease";
+import { ContextoTema } from "./contextos/contextoTema";
 
 function App() {
+  const { tema } = useContext(ContextoTema);
+
   return (
     <BrowserRouter>
       <ContenedorPrincipal>
         <Header />
-        <Main>
+        <Main tema={tema}>
           <Routes>
             <Route path="*" element={<Error404 />} />
             <Route path="/" element={<Servicios />} />
@@ -40,6 +44,8 @@ const ContenedorPrincipal = styled.div`
 `;
 
 const Main = styled.main`
+  font-size: ${(props) => (props.tema ? props.tema.fuente + "px" : "10px")};
+  text-align: ${(props) => (props.tema ? props.tema.alineado : "right")};
   background: #fff;
   padding: 40px;
   border-radius: 10px;
