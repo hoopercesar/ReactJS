@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import { Contexto } from "../Contextos/Contexto";
 
@@ -32,11 +31,6 @@ function Productos() {
     </div>
   );
 }
-
-Productos.propTypes = {
-  productos: PropTypes.array,
-  agregarProductoCarrito: PropTypes.func,
-};
 
 const ContenedorProductos = styled.div`
   display: grid;

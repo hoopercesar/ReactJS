@@ -1,7 +1,8 @@
-import PropTypes from "prop-types";
-import { NavLink, BrowserRouter } from "react-router-dom";
+import { useContext } from "react";
+import { Contexto } from "../Contextos/Contexto";
 
-function Total({ carrito }) {
+function Total() {
+  const { carrito } = useContext(Contexto);
   let total = 0;
   if (carrito.length > 0) {
     carrito.forEach((element) => {
@@ -13,9 +14,5 @@ function Total({ carrito }) {
 
   return <div>Total: ${total}</div>;
 }
-
-Total.propTypes = {
-  carrito: PropTypes.array,
-};
 
 export default Total;

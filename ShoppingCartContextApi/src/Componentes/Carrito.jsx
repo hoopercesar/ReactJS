@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BsCart4 } from "react-icons/Bs";
 import { FaMinus } from "react-icons/Fa";
 import { RiDeleteBinLine } from "react-icons/Ri";
-import PropTypes from "prop-types";
+
 import Total from "./Total";
 import { useContext } from "react";
 import { Contexto } from "../Contextos/Contexto";
@@ -37,17 +37,11 @@ function Carrito() {
         ) : (
           <p>No hay nada en el carrito</p>
         )}
-        <Total carrito={carrito} />
+        <Total />
       </div>
     </div>
   );
 }
-
-Carrito.propTypes = {
-  carrito: PropTypes.array,
-  eliminarUnaUnidadCarrito: PropTypes.func,
-  eliminarProducto: PropTypes.func,
-};
 
 const Producto = styled.div`
   padding: 10px;
