@@ -4,8 +4,12 @@ import { FaMinus } from "react-icons/Fa";
 import { RiDeleteBinLine } from "react-icons/Ri";
 import PropTypes from "prop-types";
 import Total from "./Total";
+import { useContext } from "react";
+import { Contexto } from "../Contextos/Contexto";
 
-function Carrito({ carrito, eliminarUnaUnidadCarrito, eliminarProducto }) {
+function Carrito() {
+  const { carrito, eliminarUnaUnidadCarrito, eliminarProducto } =
+    useContext(Contexto);
   return (
     <div>
       <h3>

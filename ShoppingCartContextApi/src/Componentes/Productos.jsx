@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { Contexto } from "../Contextos/Contexto";
 
-function Productos({ productos, agregarProductoCarrito }) {
+function Productos() {
+  const { productos, agregarProductoCarrito } = useContext(Contexto);
+
   return (
     <div>
       <h3>Productos</h3>

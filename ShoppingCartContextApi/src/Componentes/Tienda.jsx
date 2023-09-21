@@ -1,21 +1,12 @@
 import Productos from "./Productos";
-import PropTypes from "prop-types";
 
-function Tienda({ productos, agregarProductoCarrito }) {
+function Tienda() {
   return (
     <div>
       <h2>Tienda</h2>
-      <Productos
-        productos={productos}
-        agregarProductoCarrito={agregarProductoCarrito}
-      />
+      <Productos />
     </div>
   );
 }
-
-Tienda.propTypes = {
-  productos: PropTypes.array,
-  agregarProductoCarrito: PropTypes.func,
-};
 
 export default Tienda;
