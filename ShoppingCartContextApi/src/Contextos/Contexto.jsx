@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const Contexto = React.createContext();
 
@@ -128,6 +129,10 @@ const ProveedorContexto = ({ children }) => {
       {children}{" "}
     </Contexto.Provider>
   );
+};
+
+ProveedorContexto.propTypes = {
+  children: PropTypes.object,
 };
 
 export { Contexto, ProveedorContexto };
