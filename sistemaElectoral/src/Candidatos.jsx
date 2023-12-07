@@ -9,10 +9,12 @@ function Candidatos() {
         const fetchData = async () => {
             try {
                 // Realizar solicitud Get a servidor php
-                const response = await axios.get('http://localhost:3306/candidatos.php')
+                const response = await axios.get('http://localhost/candidatos.php');
                 
-                if (!response) {
+                if (!response.ok) {
                     console.log("No hubo descarga de los datos");
+                } else {
+                    console.log("Datos cargados");
                 }
 
                 // actualizar candidatos
@@ -22,6 +24,8 @@ function Candidatos() {
                 setError("Hubo un problema al obtener datos del servidor")
             };
         }
+
+        fetchData();
     }, []);
 
     return (<> 
