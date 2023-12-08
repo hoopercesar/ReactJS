@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { isFileServingAllowed } from "vite";
 
 function RegionesComunas(params) {
     const [datos, setDatos] = useState([]);
@@ -19,19 +20,21 @@ function RegionesComunas(params) {
                 }
 
                 // actualiza la lista de datos
-                setDatos(responde.data);
+                setDatos(response.data);
 
             } catch (error) {
-                console.error("Hubo un error al conectar al servidor: ", error)
-
+                console.error("Hubo un error al conectar al servidor: ", error);
             };
         }
 
         fetchData();
-
     }, [])
 
-    return <></>
+    return <>
+        <select>
+            <p>Algo</p>
+        </select>
+    </>
 
     
 }
