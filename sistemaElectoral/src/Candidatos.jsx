@@ -11,10 +11,10 @@ function Candidatos() {
                 // Realizar solicitud Get a servidor php
                 const response = await axios.get('http://localhost/candidatos.php');
                 
-                if (!response.ok) {
+                if (!response) {
                     console.log("No hubo descarga de los datos");
                 } else {
-                    console.log("Datos cargados");
+                    console.log("Datos cargados", response.data);
                 }
 
                 // actualizar candidatos
@@ -28,16 +28,17 @@ function Candidatos() {
         fetchData();
     }, []);
 
-    return (<> 
-        <p>Estos son los candidatos</p>
-        <ul>
-            {candidatos.map((candidato, index)=>{
-                console.log("di algo");
-                <li key={index}>{candidato.region} </li>
-            })}
-        </ul>
-     </>);
-
+   
+    return (
+        <div>
+            {error && <p>{error}</p>}
+             <select required>
+                {candidatos.map((elemento) => (
+                    <option key={elemento.id} >{elemento.candidato} </option>
+                ))}
+             </select>     
+        </div>
+      );
 }
 
 export default Candidatos;
