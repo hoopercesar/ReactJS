@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Candidatos from "./Candidatos";
 
 
 function RegionesComunas() {
@@ -27,8 +28,7 @@ function RegionesComunas() {
                 setDatos(response.data);
 
                 // crea una lista sin regiones duplicadas
-                const uniqueRegs = [... new Set(response.data.map(element => element.region))]; 
-                // éste sí tiene salida              
+                const uniqueRegs = [... new Set(response.data.map(element => element.region))];            
 
                 // actualiza regiones. 
                 setRegiones(uniqueRegs);
@@ -80,6 +80,7 @@ function RegionesComunas() {
             <option key={index}>{comuna}</option>
             ))}
         </select>
+        <Candidatos region={regionSeleccionada} />
     </>
     
 
