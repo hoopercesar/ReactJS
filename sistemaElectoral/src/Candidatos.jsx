@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-function Candidatos() {
+function Candidatos({ region }) {
     const [candidatos, setCandidatos] = useState([]);
     const [error, setError] = useState(null);
 
@@ -27,14 +27,17 @@ function Candidatos() {
 
         fetchData();
     }, []);
-
    
     return (
         <div>
+            
             {error && <p>{error}</p>}
-             <select required>
-                {candidatos.map((elemento) => (
-                    <option key={elemento.id} >{elemento.candidato} </option>
+             <select>
+                <option value="">Selecciona un Candidato</option>
+                {candidatos
+                .filter(elemento => elemento.region === region)
+                .map((elemento, index) => (
+                    <option key={index}>{elemento.candidato} </option>
                 ))}
              </select>     
         </div>
