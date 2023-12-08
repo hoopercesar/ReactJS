@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { isFileServingAllowed } from "vite";
+
 
 function RegionesComunas(params) {
     const [datos, setDatos] = useState([]);
@@ -32,7 +32,9 @@ function RegionesComunas(params) {
 
     return <>
         <select>
-            <p>Algo</p>
+            {datos.map((elemento)=>(
+                <option key={elemento.id}>{elemento.region}</option>
+            ))}
         </select>
     </>
 
