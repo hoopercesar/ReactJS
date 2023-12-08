@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import styled from "styled-components";
 
 function Candidatos({ region }) {
     const [candidatos, setCandidatos] = useState([]);
@@ -32,16 +33,24 @@ function Candidatos({ region }) {
         <div>
             
             {error && <p>{error}</p>}
-             <select>
+             <Seleccion>
                 <option value="">Selecciona un Candidato</option>
                 {candidatos
                 .filter(elemento => elemento.region === region)
                 .map((elemento, index) => (
                     <option key={index}>{elemento.candidato} </option>
                 ))}
-             </select>     
+             </Seleccion>     
         </div>
       );
 }
+
+const Seleccion = styled.select`
+    width: calc(100% - 10px); /* Ajusta el ancho para considerar el relleno */
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 3px;
+`;
 
 export default Candidatos;
