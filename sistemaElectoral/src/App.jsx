@@ -1,19 +1,21 @@
-import { useState } from 'react'
-import ValidaRut from './ValidaRut'
-import Candidatos from './Candidatos'
+
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import FormularioDatos from './FormularioDatos'
 
+
+
+function App() {
+  
   return (
     <>
-    <p>Hola, mundo</p>
-    <ValidaRut />
-    <Candidatos />
 
-   
+    <p>Datos del elector</p>
+    <FormularioDatos/> 
+
     </>
+           
+    
   )
 }
 
