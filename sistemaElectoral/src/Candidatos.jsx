@@ -15,7 +15,7 @@ function Candidatos({ region }) {
                 if (!response) {
                     console.log("No hubo descarga de los datos");
                 } else {
-                    console.log("Datos cargados", response.data);
+                    console.log("Datos cargados correctamente");
                 }
 
                 // actualizar candidatos
@@ -30,27 +30,51 @@ function Candidatos({ region }) {
     }, []);
    
     return (
-        <div>
+        <>
+
             
             {error && <p>{error}</p>}
-             <Seleccion>
-                <option value="">Selecciona un Candidato</option>
-                {candidatos
+
+            <Label htmlFor="candidato">Selecciona Candidato:</Label>
+            <Select>
+            <option value="">Selecciona un candidato</option>
+            {candidatos
                 .filter(elemento => elemento.region === region)
                 .map((elemento, index) => (
                     <option key={index}>{elemento.candidato} </option>
                 ))}
-             </Seleccion>     
-        </div>
+            
+            </Select>
+
+            {/*
+                <Seleccion>
+                <option value="">Selecciona un Candidato</option>
+                
+             </Seleccion>    
+            */}
+ 
+        </>
       );
 }
 
-const Seleccion = styled.select`
-    width: calc(100% - 10px); /* Ajusta el ancho para considerar el relleno */
-    padding: 5px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    border-radius: 3px;
+const Label = styled.label`
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+`;
+
+const Select = styled.select`
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 `;
 
 export default Candidatos;
