@@ -52,8 +52,8 @@ function RegionesComunas() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // realizar solicitud al servidor
-                const response = await axios.get("http://localhost/regiones.php");
+                // realizar solicitud al servidor con SpringBoot!!
+                const response = await axios.get("http://localhost:8080/regiones");
 
                 // comprueba que se realizó la carga de datos
                 if (!response) {
