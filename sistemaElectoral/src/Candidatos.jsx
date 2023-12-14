@@ -10,7 +10,7 @@ function Candidatos({ region }) {
         const fetchData = async () => {
             try {
                 // Realizar solicitud Get a servidor php
-                const response = await axios.get('http://localhost/candidatos.php');
+                const response = await axios.get('http://localhost:8080/candidatos');
                 
                 if (!response) {
                     console.log("No hubo descarga de los datos");
@@ -45,13 +45,6 @@ function Candidatos({ region }) {
                 ))}
             
             </Select>
-
-            {/*
-                <Seleccion>
-                <option value="">Selecciona un Candidato</option>
-                
-             </Seleccion>    
-            */}
  
         </>
       );
@@ -63,12 +56,6 @@ const Label = styled.label`
   display: block;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-`;
 
 const Select = styled.select`
   width: 100%;
