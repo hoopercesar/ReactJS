@@ -34,17 +34,34 @@ const Boton = styled.button`
 
 const Formulario = () => {
 
+  const [datosFormulario, setDatosFormulario] = useState({
+    nombre: '',
+    correo: '',
+    rut: '',
+    region: '',
+    comuna: '',
+    candidato: '',
+    opcionesSeleccionadas: []
+  })
+
+  const actualizarDatos = (nombreCampo, valor) => {
+    setDatosFormulario(prevDatos => ({
+      ...prevDatos,
+      [nombreCampo]: valor,
+    }))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Lógica para manejar los datos del formulario
-    console.log('Datos del formulario:', { nombre, correo, dni, region, comuna, candidato, comoNosConociste });
+    console.log('Datos del formulario:', { nombre, correo, rut, region, comuna, candidato, comoNosConociste });
   };
 
   return (
     <>
     <GlobalStyle/>
     <FormularioWrapper>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
 
         <DatosPersonales/>
 
