@@ -1,5 +1,6 @@
 
 import './App.css'
+import { ProveedorContexto } from './Contexto';
 
 import FormularioDatos from './FormularioDatos'
 
@@ -8,12 +9,12 @@ import FormularioDatos from './FormularioDatos'
 function App() {
   
   return (
-    <>
-
-    <p>Datos del elector</p>
-    <FormularioDatos/> 
-
-    </>
+    
+    <ProveedorContexto>
+      <p>Datos del elector</p>
+      <FormularioDatos/> 
+    </ProveedorContexto>
+    
            
     
   )
