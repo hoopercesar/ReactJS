@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Candidatos from "./Candidatos";
 import styled from "styled-components";
+import { Contexto } from './Contexto';
 
 // definición del tag Selección
 const Seleccion = styled.select`
@@ -48,6 +49,8 @@ function RegionesComunas() {
     const [regiones, setRegiones] = useState([]);
     const [comunasPorRegion, setComunasPorRegion] = useState({});
     const [regionSeleccionada, setRegionSeleccionada] = useState('');
+    const datosFormulario = useContext(Contexto);
+    const actualizarDatos = useContext(Contexto);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -61,6 +64,8 @@ function RegionesComunas() {
                 } else {
                     console.log("Datos descargados exitosamente desde DB");
                 }
+
+                console.log("RegionesComunas", datosFormulario);
 
                 // actualiza la lista de datos
                 setDatos(response.data);
@@ -94,9 +99,10 @@ function RegionesComunas() {
     // usamos useEffect(() => {}, [regionSeleccionada]) --> 
     // ésto significa que el useEffect se va a ejecutar cada vez que cambie la región seleccionada    
 
-    const handleRegionChange = (ev) => {
+    const handleRegionChange = async (ev) => {
         const selectedRegion = ev.target.value;
-        setRegionSeleccionada(selectedRegion);
+        setRegionSeleccionada(selectedRegion); 
+        actualizarDatos('region', selectedRegion)
     }
 
     return <>
@@ -121,36 +127,10 @@ function RegionesComunas() {
 
         
         {/*Componente candidatos con props region */}
-        <Candidatos region={regionSeleccionada} />
-
-        {/* 
-
-                <Seleccion 
-            onChange={handleRegionChange} 
-            value={regionSeleccionada}
-        >
-            <option value="">Selecciona una Región</option>
-            {regiones.map((element, index)=>(
-                <option key={index}>{element}</option>
-            ))}
-            </Seleccion>
-            <Seleccion>
-                <option value="">Selecciona una Comuna</option>
-                {/* la siguiente línea contiene un condicional. si comunasPorRegion[regionSeleccionada] es true
-                entonces se ejecuta el map, si es false no se ejecuta el map 
-                {comunasPorRegion[regionSeleccionada] && comunasPorRegion[regionSeleccionada].map((comuna, index) => (                
-                <option key={index}>{comuna}</option>
-                ))}
-            </Seleccion>
-
-        
-            
-            
-        
-        */}
-        
+        <Candidatos region={regionSeleccionada} />        
 
     </>    
 }
 
 export default RegionesComunas;
+
