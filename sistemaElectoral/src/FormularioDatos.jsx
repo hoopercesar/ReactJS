@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import DatosPersonales from './DatosPersonales';
 import RegionesComunas from './RegionesComunas';
 import CheckBoxes from './CheckBoxes';
-import { Contexto } from './Contexto';
+import { useContexto } from './Contexto';
 
 // Estilo global para el fondo negro en el área fuera del formulario
 const GlobalStyle = createGlobalStyle`
@@ -34,7 +34,7 @@ const Boton = styled.button`
 `;
 
 const Formulario = () => {
-  const { datosFormulario, actualizarDatos } = useContext(Contexto);
+  const { datosFormulario, actualizarDatos } = useContexto();
 
   {/*const [datosFormulario, setDatosFormulario] = useState({
     nombre: '',
