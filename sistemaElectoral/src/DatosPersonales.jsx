@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import VerificaRUT from './validaRut';
+import { useContexto } from './Contexto';
 
 
 function DatosPersonales() {
@@ -16,9 +17,12 @@ function DatosPersonales() {
         if (rutNew.valida()) return true;
     }
 
+    const {actualizarDatos} = useContexto();
+
 
     const handleNombreChange = (event) => {
         setNombre(event.target.value);
+        actualizarDatos('nombre', event.target.value);
     };
 
     const handleCorreoChange = (event) => {
@@ -46,7 +50,7 @@ function DatosPersonales() {
   return (
     <>
         <Label htmlFor="nombre">Nombre:</Label>
-        <Input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+        <Input type="text" id="nombre" value={nombre} onChange={handleNombreChange} required />
 
         <Label htmlFor="correo">Correo:</Label>
         <Input 
