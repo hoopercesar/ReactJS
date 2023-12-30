@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import Candidatos from "./Candidatos";
 import styled from "styled-components";
-import { Contexto } from './Contexto';
+import { useContexto } from './Contexto';
 
 // definición del tag Selección
 const Seleccion = styled.select`
@@ -49,8 +49,7 @@ function RegionesComunas() {
     const [regiones, setRegiones] = useState([]);
     const [comunasPorRegion, setComunasPorRegion] = useState({});
     const [regionSeleccionada, setRegionSeleccionada] = useState('');
-    const datosFormulario = useContext(Contexto);
-    const actualizarDatos = useContext(Contexto);
+   
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,8 +63,6 @@ function RegionesComunas() {
                 } else {
                     console.log("Datos descargados exitosamente desde DB");
                 }
-
-                console.log("RegionesComunas", datosFormulario);
 
                 // actualiza la lista de datos
                 setDatos(response.data);
@@ -97,8 +94,19 @@ function RegionesComunas() {
         
     }, [regionSeleccionada])
     // usamos useEffect(() => {}, [regionSeleccionada]) --> 
-    // ésto significa que el useEffect se va a ejecutar cada vez que cambie la región seleccionada    
+    // ésto significa que el useEffect se va a ejecutar cada vez que cambie la región seleccionada
+    
+    // usa la función global actualizarDatos para actualizar
+    // las selecciones e información que ingrese el usuario
+    const { actualizarDatos } = useContexto();
 
+    // controla la seleccion que se haga en comuna y actualiza el valor 
+    // de la ciudad seleccionada por el usuario
+    const handleComunaChange = (ev) => {
+        actualizarDatos('comuna', ev.target.value);
+    }
+    
+    // controla selección de región y actualiza el valor de región seleccionada por usuario
     const handleRegionChange = async (ev) => {
         const selectedRegion = ev.target.value;
         setRegionSeleccionada(selectedRegion); 
@@ -118,7 +126,7 @@ function RegionesComunas() {
 
         {/*Selección de Comuna */}
         <Label htmlFor="comuna">Selecciona Comuna:</Label>
-        <Select required>
+        <Select required onChange={handleComunaChange}>
           <option value="">Selecciona una comuna</option>
           {comunasPorRegion[regionSeleccionada] && comunasPorRegion[regionSeleccionada].map((comuna, index) => (                
                 <option key={index}>{comuna}</option>
