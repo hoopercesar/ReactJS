@@ -10,7 +10,7 @@ function Candidatos() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Realizar solicitud Get a servidor php
+                // Realizar solicitud Get a servidor Java-SpringBoot
                 const response = await axios.get('http://localhost:8080/candidatos');
                 
                 if (!response) {
@@ -30,8 +30,14 @@ function Candidatos() {
         fetchData();
     }, []);
 
-    const {datosFormulario} = useContexto();
-    console.log("estamos en candidatos",datosFormulario.region)
+    // usa datosFormulario para actualizar región con la que se puede desplegar los candidatos
+    // correspondientes a la región seleccionada. Además, carga la función actualizarDatos
+    // para actualizar candidato seleccionado por usuario. 
+    const {datosFormulario, actualizarDatos} = useContexto();
+
+    const handleCandidatoChange = (ev) => {
+        actualizarDatos('candidato', ev.target.value);
+    }
    
     return (
         <>
@@ -40,7 +46,7 @@ function Candidatos() {
             {error && <p>{error}</p>}
 
             <Label htmlFor="candidato">Selecciona Candidato:</Label>
-            <Select>
+            <Select onChange={handleCandidatoChange}>
             <option value="">Selecciona un candidato</option>
             {candidatos
                 .filter(elemento => elemento.region === datosFormulario.region)
