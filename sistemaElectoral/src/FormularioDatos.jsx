@@ -4,6 +4,7 @@ import DatosPersonales from './DatosPersonales';
 import RegionesComunas from './RegionesComunas';
 import CheckBoxes from './CheckBoxes';
 import { useContexto } from './Contexto';
+import Candidatos from "./Candidatos";
 
 // Estilo global para el fondo negro en el área fuera del formulario
 const GlobalStyle = createGlobalStyle`
@@ -83,9 +84,11 @@ const Formulario = () => {
     <FormularioWrapper>
       <form onSubmit={handleSubmit} autoComplete="off">
 
-        <DatosPersonales actualizarDatos={actualizarDatos}/>
+        <DatosPersonales />
 
         <RegionesComunas />  
+
+        <Candidatos /> 
 
         <CheckBoxes actualizarDatos={actualizarDatos}/>        
 
