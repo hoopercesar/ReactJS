@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import styled from "styled-components";
+import { useContexto } from "./Contexto";
 
-function Candidatos({ region }) {
+function Candidatos() {
     const [candidatos, setCandidatos] = useState([]);
     const [error, setError] = useState(null);
 
@@ -28,6 +29,9 @@ function Candidatos({ region }) {
 
         fetchData();
     }, []);
+
+    const {datosFormulario} = useContexto();
+    console.log("estamos en candidatos",datosFormulario.region)
    
     return (
         <>
@@ -39,7 +43,7 @@ function Candidatos({ region }) {
             <Select>
             <option value="">Selecciona un candidato</option>
             {candidatos
-                .filter(elemento => elemento.region === region)
+                .filter(elemento => elemento.region === datosFormulario.region)
                 .map((elemento, index) => (
                     <option key={index}>{elemento.candidato} </option>
                 ))}
