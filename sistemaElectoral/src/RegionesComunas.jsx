@@ -135,7 +135,7 @@ function RegionesComunas() {
 
         
         {/*Componente candidatos con props region */}
-        <Candidatos region={regionSeleccionada} />        
+        {/*<Candidatos region={regionSeleccionada} /> */}        
 
     </>    
 }
