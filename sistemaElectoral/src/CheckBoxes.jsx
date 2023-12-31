@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useContexto } from "./Contexto";
 
 
 const CheckboxContainer = styled.div`
@@ -14,6 +15,18 @@ const CheckboxLabel = styled.label`
 
 function CheckBoxes() {
     const [comoNosConociste, setComoNosConociste] = useState([]);
+    const {actualizarDatos} = useContexto();
+
+    //console.log(comoNosConociste)
+
+    const handleCheckBoxChange = (option) => {
+      setComoNosConociste((prev) => prev.includes(option) ? prev.filter(item => item !== option) : [...prev, option]);
+      
+    }
+    
+    useEffect(() => {
+      actualizarDatos('opcionesSeleccionadas', comoNosConociste.join('-'))
+    }, [comoNosConociste])
 
     return (
         <>
@@ -24,7 +37,7 @@ function CheckBoxes() {
             id="tv"
             value="TV"
             checked={comoNosConociste.includes('TV')}
-            onChange={() => setComoNosConociste((prev) => (prev.includes('TV') ? prev.filter((item) => item !== 'TV') : [...prev, 'TV']))}
+            onChange={() => handleCheckBoxChange('TV')}
           />
           <CheckboxLabel htmlFor="tv">TV</CheckboxLabel>
 
@@ -33,7 +46,7 @@ function CheckBoxes() {
             id="rrss"
             value="RRSS"
             checked={comoNosConociste.includes('RRSS')}
-            onChange={() => setComoNosConociste((prev) => (prev.includes('RRSS') ? prev.filter((item) => item !== 'RRSS') : [...prev, 'RRSS']))}
+            onChange={() => handleCheckBoxChange('RRSS')}
           />
           <CheckboxLabel htmlFor="rrss">RRSS</CheckboxLabel>
 
@@ -42,7 +55,7 @@ function CheckBoxes() {
             id="web"
             value="WEB"
             checked={comoNosConociste.includes('WEB')}
-            onChange={() => setComoNosConociste((prev) => (prev.includes('WEB') ? prev.filter((item) => item !== 'WEB') : [...prev, 'WEB']))}
+            onChange={() => handleCheckBoxChange('WEB')}
           />
           <CheckboxLabel htmlFor="web">WEB</CheckboxLabel>
 
@@ -51,7 +64,7 @@ function CheckBoxes() {
             id="amigos"
             value="Amigos"
             checked={comoNosConociste.includes('Amigos')}
-            onChange={() => setComoNosConociste((prev) => (prev.includes('Amigos') ? prev.filter((item) => item !== 'Amigos') : [...prev, 'Amigos']))}
+            onChange={() => handleCheckBoxChange('Amigos')}
           />
           <CheckboxLabel htmlFor="amigos">Amigos</CheckboxLabel>
         </CheckboxContainer>
