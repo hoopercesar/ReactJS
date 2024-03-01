@@ -1,5 +1,11 @@
+import PropTypes from "prop-types";
+
 function GeneraBoleta() {
-    return <div>Genera la Boleta</div>
+  return <div>GeneraBoleta</div>;
 }
+
+GeneraBoleta.propTypes = {
+  carrito: PropTypes.array,
+};
 
 export default GeneraBoleta;
