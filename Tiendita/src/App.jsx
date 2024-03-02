@@ -3,27 +3,33 @@ import { NavLink, BrowserRouter, Routes, Route } from "react-router-dom";
 import Inicio from "./Componentes/Inicio";
 import Blog from "./Componentes/Blog";
 import Tienda from "./Componentes/Tienda";
-import Error404 from "./Componentes/Error404";
 import Carrito from "./Componentes/Carrito";
 import GeneraBoleta from "./Componentes/GeneraBoleta";
+import Error404 from "./Componentes/Error404";
+import Ofertas from "./Componentes/Ofertas";
+import Promociones from "./Componentes/Promociones";
 
 const App = () => {
   return (
     <BrowserRouter>
       {" "}
+      <Fondo>
       <Contenedor>
         <Menu>
           {" "}
-          <NavLink to="/">Inicio</NavLink>
-          <NavLink to="/blog">Blog</NavLink>
-          <NavLink to="/tienda">Tienda</NavLink>
+          <NavLink to="/tienda">Productos</NavLink>
+          <NavLink to="/ofertas">Ofertas</NavLink>
+          <NavLink to="/promociones">Promociones</NavLink>
+          <NavLink to="/blog">Comenta</NavLink>
         </Menu>
         <main>
           <Routes>
             <Route path="*" element={<Error404 />} />
             <Route path="/" element={<Inicio />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/ofertas" element={<Ofertas />} />
             <Route path="/tienda" element={<Tienda />} />
+            <Route path="/promociones" element={<Promociones />} />
             <Route path="boleta" element={<GeneraBoleta />} />
           </Routes>
         </main>
@@ -31,9 +37,19 @@ const App = () => {
           <Carrito />
         </aside>
       </Contenedor>
+      </Fondo>
     </BrowserRouter>
   );
 };
+
+
+const Fondo = styled.div`
+  background-image: url('../assets/fondo.png'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8; /* Ajusta la opacidad según tus necesidades */
+`;
 
 const Contenedor = styled.div`
   max-width: 1000px;
