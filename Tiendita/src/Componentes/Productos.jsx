@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { Contexto } from "../Contextos/Contexto";
+// import rollSalmon  from '../assets/rolls_salmon.png'
+
+const imagenes = import.meta.glob('../assets/*.png', { eager: true });
 
 function Productos() {
   const { productos, agregarProductoCarrito } = useContext(Contexto);
@@ -11,16 +14,25 @@ function Productos() {
 
       <ContenedorProductos>
         {productos.map((producto, index) => {
+            const imagenSrc = imagenes[`../assets/${producto.clave}.png`]?.default;
+
           return (
             <div key={index}>
               <Producto>
+                {console.log("../assets/" + producto.clave + ".png")};
+                <img 
+                src= {imagenSrc}
+                alt={producto.nombre} 
+                width="200" 
+                height="150"
+                />
                 <p>{producto.nombre} </p>
                 <Boton
                   onClick={() =>
                     agregarProductoCarrito(producto.id, producto.nombre)
                   }
                 >
-                  Agregar al carrito
+                  Agregar
                   <p>${producto.precio} </p>
                 </Boton>
               </Producto>
@@ -61,7 +73,7 @@ const Boton = styled.button`
   display: inline-block;
   padding: 2px 10px;
   cursor: pointer;
-  width: 40%;
+  width: 30%;
   border-radius: 3px;
   transition: 0.3s ease all;
 
