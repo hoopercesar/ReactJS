@@ -12,11 +12,15 @@ const FormularioPago = () => {
     const schema = yup.object().shape({
       nombre: yup.string().required(),
       apellido: yup.string().required(),
-      username: yup.string().required(),
+      rut: yup.string().required(),
+      direccion: yup.string().required(),
+      numero: yup.string().required(),
+      telefono: yup.string().required(),
       ciudad: yup.string().required(),
       region: yup.string().required(),
       terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
     });
+    console.log(yup, schema)
   
     return (
      <>
@@ -33,7 +37,6 @@ const FormularioPago = () => {
           telefono: '', 
           ciudad: '',
           region: '',
-          file: null,
           terms: false,
         }}
       >
@@ -54,7 +57,7 @@ const FormularioPago = () => {
                   onChange={handleChange}
                   isValid={touched.nombre && !errors.nombre}
                 />
-                <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                
               </Form.Group>
               <Form.Group
                 as={Col}
@@ -71,7 +74,7 @@ const FormularioPago = () => {
                   isValid={touched.apellido && !errors.apellido}
                 />
   
-                <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                
               </Form.Group>
               <Form.Group
                 as={Col}
@@ -88,7 +91,7 @@ const FormularioPago = () => {
                   isValid={touched.rut && !errors.rut}
                 />
   
-                <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                
               </Form.Group>
             </Row>
 
