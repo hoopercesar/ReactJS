@@ -10,27 +10,29 @@ const FormularioPago = () => {
     const { Formik } = formik;
 
     const schema = yup.object().shape({
-      firstName: yup.string().required(),
-      lastName: yup.string().required(),
+      nombre: yup.string().required(),
+      apellido: yup.string().required(),
       username: yup.string().required(),
-      city: yup.string().required(),
-      state: yup.string().required(),
-      zip: yup.string().required(),
-      file: yup.mixed().required(),
+      ciudad: yup.string().required(),
+      region: yup.string().required(),
       terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
     });
   
     return (
+     <>
+     <h2>Formulario de Compra</h2>
       <Formik
         validationSchema={schema}
         onSubmit={console.log}
         initialValues={{
-          firstName: 'Mark',
-          lastName: 'Otto',
-          username: '',
-          city: '',
-          state: '',
-          zip: '',
+          nombre: '',
+          apellido: '',
+          rut: '',
+          direccion: '',
+          numero: '', 
+          telefono: '', 
+          ciudad: '',
+          region: '',
           file: null,
           terms: false,
         }}
@@ -44,13 +46,13 @@ const FormularioPago = () => {
                 controlId="validationFormik101"
                 className="position-relative"
               >
-                <Form.Label>First name</Form.Label>
+                <Form.Label>Nombre</Form.Label>
                 <Form.Control
                   type="text"
-                  name="firstName"
-                  value={values.firstName}
+                  name="nombre"
+                  value={values.nombre}
                   onChange={handleChange}
-                  isValid={touched.firstName && !errors.firstName}
+                  isValid={touched.nombre && !errors.nombre}
                 />
                 <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
               </Form.Group>
@@ -60,36 +62,101 @@ const FormularioPago = () => {
                 controlId="validationFormik102"
                 className="position-relative"
               >
-                <Form.Label>Last name</Form.Label>
+                <Form.Label>Apellido</Form.Label>
                 <Form.Control
                   type="text"
-                  name="lastName"
-                  value={values.lastName}
+                  name="apellido"
+                  value={values.apellido}
                   onChange={handleChange}
-                  isValid={touched.lastName && !errors.lastName}
+                  isValid={touched.apellido && !errors.apellido}
                 />
   
                 <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationFormikUsername2">
-                <Form.Label>Username</Form.Label>
-                <InputGroup hasValidation>
-                  <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                  <Form.Control
-                    type="text"
-                    placeholder="Username"
-                    aria-describedby="inputGroupPrepend"
-                    name="username"
-                    value={values.username}
-                    onChange={handleChange}
-                    isInvalid={!!errors.username}
-                  />
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {errors.username}
-                  </Form.Control.Feedback>
-                </InputGroup>
+              <Form.Group
+                as={Col}
+                md="4"
+                controlId="validationFormik102"
+                className="position-relative"
+              >
+                <Form.Label>Rut</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="rut"
+                  value={values.rut}
+                  onChange={handleChange}
+                  isValid={touched.rut && !errors.rut}
+                />
+  
+                <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
+
+            <Row className="mb-3">
+                <Form.Group
+                 as={Col}
+                 md="6"
+                 controlId="validationFormik103"
+                 className="position-relative"                
+                >
+                    <Form.Label>Dirección</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Calle"
+                    name="direccion"
+                    value={values.direccion}
+                    onChange={handleChange}
+                    isInvalid={!!errors.direccion}
+                    />  
+                    <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.direccion}
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group
+                 as={Col}
+                 md="3"
+                 controlId="validationFormik103"
+                 className="position-relative"                
+                >
+                    <Form.Label>Número</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Número"
+                    name="numero"
+                    value={values.numero}
+                    onChange={handleChange}
+                    isInvalid={!!errors.numero}
+                    />  
+                    <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.numero}
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group
+                 as={Col}
+                 md="3"
+                 controlId="validationFormik103"
+                 className="position-relative"                
+                >
+                    <Form.Label>Teléfono</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Teléfono"
+                    name="telefono"
+                    value={values.telefono}
+                    onChange={handleChange}
+                    isInvalid={!!errors.telefono}
+                    />  
+                    <Form.Control.Feedback type="invalid" tooltip>
+                    {errors.telefono}
+                    </Form.Control.Feedback>
+                </Form.Group>
+
+            </Row>
+
+
+
             <Row className="mb-3">
               <Form.Group
                 as={Col}
@@ -97,18 +164,18 @@ const FormularioPago = () => {
                 controlId="validationFormik103"
                 className="position-relative"
               >
-                <Form.Label>City</Form.Label>
+                <Form.Label>Ciudad</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="City"
-                  name="city"
-                  value={values.city}
+                  placeholder="ciudad"
+                  name="ciudad"
+                  value={values.ciudad}
                   onChange={handleChange}
-                  isInvalid={!!errors.city}
+                  isInvalid={!!errors.ciudad}
                 />
   
                 <Form.Control.Feedback type="invalid" tooltip>
-                  {errors.city}
+                  {errors.ciudad}
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group
@@ -117,17 +184,17 @@ const FormularioPago = () => {
                 controlId="validationFormik104"
                 className="position-relative"
               >
-                <Form.Label>State</Form.Label>
+                <Form.Label>Region</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="State"
-                  name="state"
-                  value={values.state}
+                  placeholder="region"
+                  name="region"
+                  value={values.region}
                   onChange={handleChange}
-                  isInvalid={!!errors.state}
+                  isInvalid={!!errors.region}
                 />
                 <Form.Control.Feedback type="invalid" tooltip>
-                  {errors.state}
+                  {errors.region}
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group
@@ -136,34 +203,10 @@ const FormularioPago = () => {
                 controlId="validationFormik105"
                 className="position-relative"
               >
-                <Form.Label>Zip</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Zip"
-                  name="zip"
-                  value={values.zip}
-                  onChange={handleChange}
-                  isInvalid={!!errors.zip}
-                />
   
-                <Form.Control.Feedback type="invalid" tooltip>
-                  {errors.zip}
-                </Form.Control.Feedback>
               </Form.Group>
             </Row>
-            <Form.Group className="position-relative mb-3">
-              <Form.Label>File</Form.Label>
-              <Form.Control
-                type="file"
-                required
-                name="file"
-                onChange={handleChange}
-                isInvalid={!!errors.file}
-              />
-              <Form.Control.Feedback type="invalid" tooltip>
-                {errors.file}
-              </Form.Control.Feedback>
-            </Form.Group>
+
             <Form.Group className="position-relative mb-3">
               <Form.Check
                 required
@@ -181,6 +224,7 @@ const FormularioPago = () => {
           </Form>
         )}
       </Formik>
+      </>
     );
   
 }
