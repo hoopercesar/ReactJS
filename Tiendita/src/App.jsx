@@ -8,6 +8,9 @@ import GeneraBoleta from "./Componentes/GeneraBoleta";
 import Error404 from "./Componentes/Error404";
 import Ofertas from "./Componentes/Ofertas";
 import Promociones from "./Componentes/Promociones";
+import Login from "./Auth0Components/Login";
+import FormularioPago from "./Componentes/FormularioPago";
+
 
 const App = () => {
   return (
@@ -21,6 +24,8 @@ const App = () => {
           <NavLink to="/ofertas">Ofertas</NavLink>
           <NavLink to="/promociones">Promociones</NavLink>
           <NavLink to="/blog">Comenta</NavLink>
+          <NavLink to="/registrarse">Regístrate</NavLink>
+          <Login />
         </Menu>
         <main>
           <Routes>
@@ -31,6 +36,7 @@ const App = () => {
             <Route path="/tienda" element={<Tienda />} />
             <Route path="/promociones" element={<Promociones />} />
             <Route path="boleta" element={<GeneraBoleta />} />
+            <Route path="/formulariopago" element={<FormularioPago />} />
           </Routes>
         </main>
         <aside>
@@ -44,7 +50,7 @@ const App = () => {
 
 
 const Fondo = styled.div`
-  background-image: url('../assets/fondo.png'); 
+  background-image: url('./assets/fondo.png'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
