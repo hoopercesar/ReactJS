@@ -4,6 +4,9 @@ import { useContext } from "react";
 import { Contexto } from "../Contextos/Contexto";
 import { GrSubtract} from "react-icons/gr";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { Link } from 'react-router-dom';
+
+
 
 function Carrito() {
   const { carrito, eliminarUnaUnidadCarrito, eliminarProducto } =
@@ -37,6 +40,9 @@ function Carrito() {
           <p>No hay nada en el carrito</p>
         )}
         <Total />
+       <Link to="/formulariopago" >
+        <button>Pagar</button>
+       </Link>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ function Productos() {
           return (
             <div key={index}>
               <Producto>
-                {console.log("../assets/" + producto.clave + ".png")};
+                
                 <img 
                 src= {imagenSrc}
                 alt={producto.nombre} 
@@ -27,13 +27,14 @@ function Productos() {
                 height="150"
                 />
                 <p>{producto.nombre} </p>
+                <p>${producto.precio} </p>
                 <Boton
                   onClick={() =>
                     agregarProductoCarrito(producto.id, producto.nombre)
                   }
                 >
                   Agregar
-                  <p>${producto.precio} </p>
+                  
                 </Boton>
               </Producto>
             </div>
