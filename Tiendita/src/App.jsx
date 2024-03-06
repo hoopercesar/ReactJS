@@ -10,6 +10,7 @@ import Ofertas from "./Componentes/Ofertas";
 import Promociones from "./Componentes/Promociones";
 import Login from "./Auth0Components/Login";
 import FormularioPago from "./Componentes/FormularioPago";
+import Logout from "./Auth0Components/Logout";
 
 
 const App = () => {
@@ -24,7 +25,6 @@ const App = () => {
           <NavLink to="/ofertas">Ofertas</NavLink>
           <NavLink to="/promociones">Promociones</NavLink>
           <NavLink to="/blog">Comenta</NavLink>
-          <NavLink to="/registrarse">Regístrate</NavLink>
           <Login />
         </Menu>
         <main>
@@ -37,6 +37,7 @@ const App = () => {
             <Route path="/promociones" element={<Promociones />} />
             <Route path="boleta" element={<GeneraBoleta />} />
             <Route path="/formulariopago" element={<FormularioPago />} />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </main>
         <aside>
@@ -69,11 +70,11 @@ const Contenedor = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 5px rgba(129, 129, 129, 0.1);
 `;
-
+//  #092c4c
 const Menu = styled.nav`
   width: 100%;
   text-align: center;
-  background: #092c4c;
+  background: #DA2007;
   grid-column: span 2;
   border-radius: 3px;
 
