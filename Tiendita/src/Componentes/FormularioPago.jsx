@@ -6,6 +6,27 @@ import Row from 'react-bootstrap/Row';
 import * as formik from 'formik';
 import * as yup from 'yup';
 
+// context para calcular monto total
+import { useContext } from "react";
+import { Contexto } from "../Contextos/Contexto";
+
+// función para calcular el monto total
+function montoTotal() {
+    const { carrito } = useContext(Contexto);
+    let total = 0;
+    if (carrito.length > 0) {
+      carrito.forEach((element) => {
+        // console.log(element.cantidad, element.precio);
+        total += element.cantidad * element.precio;
+      });
+      // return total;
+    }
+  
+    return total;
+  }
+
+
+
 const FormularioPago = () => {
     const { Formik } = formik;
 
@@ -18,7 +39,6 @@ const FormularioPago = () => {
       telefono: yup.string().required(),
       ciudad: yup.string().required(),
       region: yup.string().required(),
-      terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
     });
     console.log(yup, schema)
   
@@ -37,7 +57,6 @@ const FormularioPago = () => {
           telefono: '', 
           ciudad: '',
           region: '',
-          terms: false,
         }}
       >
         {({ handleSubmit, handleChange, values, touched, errors }) => (
@@ -109,11 +128,9 @@ const FormularioPago = () => {
                     name="direccion"
                     value={values.direccion}
                     onChange={handleChange}
-                    isInvalid={!!errors.direccion}
+                    
                     />  
-                    <Form.Control.Feedback type="invalid" tooltip>
-                    {errors.direccion}
-                    </Form.Control.Feedback>
+
                 </Form.Group>
 
                 <Form.Group
@@ -131,9 +148,7 @@ const FormularioPago = () => {
                     onChange={handleChange}
                     isInvalid={!!errors.numero}
                     />  
-                    <Form.Control.Feedback type="invalid" tooltip>
-                    {errors.numero}
-                    </Form.Control.Feedback>
+
                 </Form.Group>
 
                 <Form.Group
@@ -151,9 +166,7 @@ const FormularioPago = () => {
                     onChange={handleChange}
                     isInvalid={!!errors.telefono}
                     />  
-                    <Form.Control.Feedback type="invalid" tooltip>
-                    {errors.telefono}
-                    </Form.Control.Feedback>
+
                 </Form.Group>
 
             </Row>
@@ -177,9 +190,7 @@ const FormularioPago = () => {
                   isInvalid={!!errors.ciudad}
                 />
   
-                <Form.Control.Feedback type="invalid" tooltip>
-                  {errors.ciudad}
-                </Form.Control.Feedback>
+
               </Form.Group>
               <Form.Group
                 as={Col}
@@ -187,7 +198,7 @@ const FormularioPago = () => {
                 controlId="validationFormik104"
                 className="position-relative"
               >
-                <Form.Label>Region</Form.Label>
+                <Form.Label>Barrio o Sector</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="region"
@@ -196,34 +207,27 @@ const FormularioPago = () => {
                   onChange={handleChange}
                   isInvalid={!!errors.region}
                 />
-                <Form.Control.Feedback type="invalid" tooltip>
-                  {errors.region}
-                </Form.Control.Feedback>
               </Form.Group>
+
               <Form.Group
                 as={Col}
                 md="3"
                 controlId="validationFormik105"
                 className="position-relative"
               >
+                <Form.Label>Total A Pagar</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="total"
+                  value={values.total}
+                  placeholder={montoTotal()}
+                  
+                />
   
               </Form.Group>
             </Row>
 
-            <Form.Group className="position-relative mb-3">
-              <Form.Check
-                required
-                name="terms"
-                label="Agree to terms and conditions"
-                onChange={handleChange}
-                isInvalid={!!errors.terms}
-                feedback={errors.terms}
-                feedbackType="invalid"
-                id="validationFormik106"
-                feedbackTooltip
-              />
-            </Form.Group>
-            <Button type="submit">Submit form</Button>
+            <Button type="submit">Enviar</Button>
           </Form>
         )}
       </Formik>
