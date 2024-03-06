@@ -5,11 +5,13 @@ import { Contexto } from "../Contextos/Contexto";
 import { GrSubtract} from "react-icons/gr";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { Link } from 'react-router-dom';
+// importar botones de bootstrap
+import { Button } from "react-bootstrap";
 
 
 
 function Carrito() {
-  const { carrito, eliminarUnaUnidadCarrito, eliminarProducto } =
+  const { carrito, eliminarUnaUnidadCarrito, eliminarProducto, agregarProductoCarrito } =
     useContext(Contexto);
   return (
     <div>
@@ -24,15 +26,26 @@ function Carrito() {
               <Producto key={cart.id}>
                 <NombreProducto>{cart.nombre} </NombreProducto>
                 Cantidad: {cart.cantidad}
-                <button
-                  onClick={() => eliminarUnaUnidadCarrito(cart.id, cart.nombre)}
-                >
-                <GrSubtract />                
-                  
-                </button>{" "}
-                <button onClick={() => eliminarProducto(cart.id, cart.nombre)}>
+                
+                <Button 
+                  variant="success"
+                  size="sm"
+                  onClick={() => agregarProductoCarrito(cart.id, cart.nombre)}
+                >+</Button>{" "}          
+                
+                <Button 
+                  variant="warning"
+                  size="sm"
+                  onClick={() => eliminarUnaUnidadCarrito(cart.id, cart.nombre) }
+                  ><GrSubtract /></Button>
+
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => eliminarProducto(cart.id, cart.nombre)}>
                 < MdOutlineDeleteForever/>
-                </button>
+                </Button> 
+                
               </Producto>
             );
           })
@@ -41,7 +54,8 @@ function Carrito() {
         )}
         <Total />
        <Link to="/formulariopago" >
-        <button>Pagar</button>
+        <Button variant="primary">Pagar</Button>
+        
        </Link>
       </div>
     </div>
