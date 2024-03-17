@@ -21,7 +21,7 @@ const Axios = () => {
         };
 
         // Realiza la solicitud HTTP con Axios
-        const response = await axios.get('http://localhost:8081/helloAsegurado', { headers });
+        const response = await axios.get('http://localhost:8081/hello', { headers });
 
         // Guarda los datos en el estado del componente
         setData(response.data);

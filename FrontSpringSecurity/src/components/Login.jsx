@@ -50,11 +50,20 @@ const Login = () => {
             />
             <button type="submit">Enviar</button>
         </form>
-        {error && <div className="error">{error}</div>}
         <div>
-            <p>{respuesta.Message}</p>  
-            <p>{respuesta.token} </p>
-            <p>{respuesta.Username} </p>
+            {respuesta ? (
+                !error ? (
+                <div>
+                    <p>Mensaje: {respuesta.Message}</p>
+                    <p>El usuario: {respuesta.Username}</p>
+                    <p>Token: {respuesta.token}</p>
+                </div>
+                ) : (
+                <p>Ocurrió un error. Verifica tus datos de ingreso.</p>
+                )
+            ) : (
+                <p>Esperando respuesta del servidor...</p>
+            )}
         </div>
     </div>
   )
