@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from "react";
+import {useContexto} from '../contextos/UsuariosContext'
 import axios from "axios";
 
 const Login = () => {
@@ -6,6 +7,10 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [respuesta, setRespuesta] = useState('');
+    const {actualizarDatosUsuario} = useContexto();
+    
+
+   
 
     const handleLogin = async () => {
         
@@ -17,6 +22,10 @@ const Login = () => {
             if (response && response.data) {
                 console.log(response.data);
                 setRespuesta(response.data);
+                actualizarDatosUsuario('username', response.data.Username);
+                actualizarDatosUsuario('role', response.data.rol);
+                actualizarDatosUsuario('token', response.data.token);
+
             } else {
                 console.log("Error: No se recibieron datos en la respuesta");
             }
@@ -54,9 +63,7 @@ const Login = () => {
             {respuesta ? (
                 !error ? (
                 <div>
-                    <p>Mensaje: {respuesta.Message}</p>
-                    <p>El usuario: {respuesta.Username}</p>
-                    <p>Token: {respuesta.token}</p>
+                    <p>El usuario (login): {respuesta.Username}</p>
                 </div>
                 ) : (
                 <p>Ocurrió un error. Verifica tus datos de ingreso.</p>
