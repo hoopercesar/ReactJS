@@ -24,7 +24,7 @@ const CreateUsers = () => {
         const response = await axios.post('http://localhost:8081/createUser', {
             username: nuevoUsuario.username,
             email: nuevoUsuario.email,
-            roles: nuevoUsuario.role,
+            roles: [nuevoUsuario.roles],
             password: nuevoUsuario.password
         },
         {
@@ -38,7 +38,7 @@ const CreateUsers = () => {
     return (
         <div>
             <h4>Desde CreateUsers</h4>
-            {datosUsuario.role === '[ROLE_ADMIN]' ? (
+            {datosUsuario.roles === '[ROLE_ADMIN]' ? (
                 <form onSubmit={handleGuardarUsuario}>
                     <div>
                         <label htmlFor="username">Ingresa nombre del nuevo usuario</label>
@@ -61,8 +61,8 @@ const CreateUsers = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="role">Selecciona el Rol del Nuevo Usuario</label>
-                        <select id="role" name='role' value={nuevoUsuario.role} onChange={handleInputChange}>
+                        <label htmlFor="roles">Selecciona el Rol del Nuevo Usuario</label>
+                        <select id="roles" name='roles' value={nuevoUsuario.role} onChange={handleInputChange}>
                             <option value="ADMIN">ADMIN</option>
                             <option value="USER">USER</option>
                             <option value="INVITED">INVITED</option>
