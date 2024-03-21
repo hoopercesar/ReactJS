@@ -1,27 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Axios from './components/Axios'
 import Login from './components/Login'
 import CreateUsers from './components/CreateUsers'
-import { ProveedorContexto } from './contextos/UsuariosContext';
+import { NavLink, BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import styled from 'styled-components';
+import NavBar from './components/NavBar';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <ProveedorContexto>
     <div>
-      <h3>
-        Test Reactjs, Axios y SpringSecurity!
-      </h3>
-      <Login />
-      <CreateUsers />
-      
+      <NavBar />  
     </div>
-    </ProveedorContexto>
+    
   )
 }
 
 export default App
+
