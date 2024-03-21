@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink, Link, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Inicio from './Inicio';
 import Productos from './Productos';
@@ -8,9 +8,20 @@ import Blog from './Blog';
 import Usuarios from './Usuarios';
 import CreateUsers from './CreateUsers';
 import ProtectedRoutes from '../utils/ProtectedRoutes';
+import { useContexto } from "../contextos/UsuariosContext";
 
 const NavBar = () => {
-  const activacion = false;
+
+  const [esAdmin, setEsAdmin] = useState(false)
+  const { datosUsuario } = useContexto();
+
+  useEffect(()=>{
+    if (datosUsuario.roles === '[ROLE_ADMIN]') {
+      setEsAdmin(true)
+    } 
+    console.log(datosUsuario.roles=== '[ROLE_ADMIN]')
+  }, [datosUsuario])  
+
   return (
    
     <>
@@ -28,11 +39,11 @@ const NavBar = () => {
             <Route path="/usuarios" element={<Usuarios />} />
             <Route path="/blog" element={<Blog />} />
 
-            <Route element={<ProtectedRoutes canActivate={!activacion}/>} >
+            <Route element={<ProtectedRoutes canActivate={!esAdmin}/>} >
               <Route path="/login" element={<Login />} />
             </Route>
             
-            <Route element={<ProtectedRoutes canActivate={activacion}/>}>
+            <Route element={<ProtectedRoutes canActivate={esAdmin}/>}>
               <Route path="/createusers" element={<CreateUsers />} />
             </Route>
             
