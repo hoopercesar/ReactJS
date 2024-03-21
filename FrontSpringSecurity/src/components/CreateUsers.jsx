@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useContexto } from '../contextos/UsuariosContext';
 import axios from 'axios';
 
+
 const CreateUsers = () => {
     const [nuevoUsuario, setNuevoUsuario] = useState({
         username: '',
@@ -10,8 +11,9 @@ const CreateUsers = () => {
         password: ''
     });
 
-    const { datosUsuario } = useContexto();
-    console.log(datosUsuario.token)
+    console.log(nuevoUsuario);
+
+   // const { datosUsuario } = useContexto();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -20,8 +22,7 @@ const CreateUsers = () => {
 
     const handleGuardarUsuario = async (e) => {
         e.preventDefault();
-        console.log(nuevoUsuario)
-        const response = await axios.post('http://localhost:8081/createUser', {
+        const response = await axios.post("http://localhost:8081/createUser", {
             username: nuevoUsuario.username,
             email: nuevoUsuario.email,
             roles: [nuevoUsuario.roles],
@@ -36,9 +37,8 @@ const CreateUsers = () => {
     };
 
     return (
-        <div>
-            <h4>Desde CreateUsers</h4>
-            {datosUsuario.roles === '[ROLE_ADMIN]' ? (
+        <div>            
+            
                 <form onSubmit={handleGuardarUsuario}>
                     <div>
                         <label htmlFor="username">Ingresa nombre del nuevo usuario</label>
@@ -80,11 +80,7 @@ const CreateUsers = () => {
                     </div>
                     <button type="submit">Crear Usuario</button>
                 </form>
-            ) : (
-                <div>
-                    <p>Lista de productos</p>
-                </div>
-            )}
+
         </div>
     );
 };

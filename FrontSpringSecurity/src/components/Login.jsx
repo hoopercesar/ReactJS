@@ -1,16 +1,16 @@
 import React, {useState, useEffect } from "react";
 import {useContexto} from '../contextos/UsuariosContext'
 import axios from "axios";
+import { redirect, useNavigate } from "react-router-dom";
+import CreateUsers from "./CreateUsers";
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [respuesta, setRespuesta] = useState('');
-    const {actualizarDatosUsuario} = useContexto();
-    
+    const {actualizarDatosUsuario} = useContexto(); 
 
-   
 
     const handleLogin = async () => {
         
@@ -23,7 +23,7 @@ const Login = () => {
                 console.log(response.data);
                 setRespuesta(response.data);
                 actualizarDatosUsuario('username', response.data.Username);
-                actualizarDatosUsuario('role', response.data.rol);
+                actualizarDatosUsuario('roles', response.data.rol);
                 actualizarDatosUsuario('token', response.data.token);
 
             } else {
@@ -35,14 +35,16 @@ const Login = () => {
         }
     }
 
+
   return (
     <div>
-        <h3>Recibir Token del Backend</h3>
+        <h3>Ingreso a la plataforma</h3>
         
         <form onSubmit={(ev) => {
             ev.preventDefault();
             handleLogin();
             }}>
+            <div>
             <label htmlFor="username">Username</label>
             <input 
                 type="text"
@@ -50,6 +52,9 @@ const Login = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
+            </div>
+
+            <div>
             <label htmlFor="password">Password</label>
             <input 
                 type="password"
@@ -57,6 +62,9 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)} 
             />
+            </div>
+
+
             <button type="submit">Enviar</button>
         </form>
         <div>
