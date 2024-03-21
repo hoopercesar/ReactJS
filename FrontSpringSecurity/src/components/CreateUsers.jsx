@@ -11,7 +11,7 @@ const CreateUsers = () => {
         password: ''
     });
 
-    console.log(nuevoUsuario);
+    //console.log(nuevoUsuario);
 
    // const { datosUsuario } = useContexto();
 
