@@ -3,10 +3,9 @@ import { Navigate, Outlet } from "react-router-dom"
 const ProtectedRoutes = (
 {
     canActivate,
-    redirectPath = '/'
+    redirectPath = '/createusers'
 }) => {
-
-    if (!canActivate) {
+    if (canActivate) {
         return <Navigate to={redirectPath} replace />
     }
   return (
