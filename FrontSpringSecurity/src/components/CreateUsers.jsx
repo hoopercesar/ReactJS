@@ -11,10 +11,6 @@ const CreateUsers = () => {
         password: ''
     });
 
-    //console.log(nuevoUsuario);
-
-   // const { datosUsuario } = useContexto();
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNuevoUsuario({ ...nuevoUsuario, [name]: value });
