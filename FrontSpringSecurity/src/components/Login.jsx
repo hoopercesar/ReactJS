@@ -3,6 +3,7 @@ import {useContexto} from '../contextos/UsuariosContext'
 import axios from "axios";
 import { redirect, useNavigate } from "react-router-dom";
 import CreateUsers from "./CreateUsers";
+import  secureLocalStorage  from  "react-secure-storage";
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -10,6 +11,16 @@ const Login = () => {
     const [error, setError] = useState('');
     const [respuesta, setRespuesta] = useState('');
     const {actualizarDatosUsuario} = useContexto(); 
+
+    useEffect(() => {
+	    secureLocalStorage.setItem("object", {
+		    message:  "This is testing of local storage",
+	    });
+	    secureLocalStorage.setItem("number", 12234134);
+	    secureLocalStorage.setItem("string", "12");
+	    secureLocalStorage.setItem("boolean", true);
+	    console.log(secureLocalStorage.getItem("boolean"));
+	}, []);
 
 
     const handleLogin = async () => {
@@ -20,7 +31,7 @@ const Login = () => {
                 password: password,
             });
             if (response && response.data) {
-                console.log(response.data);
+                //console.log(response.data);
                 setRespuesta(response.data);
                 actualizarDatosUsuario('username', response.data.Username);
                 actualizarDatosUsuario('roles', response.data.rol);
