@@ -9,6 +9,7 @@ import Usuarios from './Usuarios';
 import CreateUsers from './CreateUsers';
 import ProtectedRoutes from '../utils/ProtectedRoutes';
 import { useContexto } from "../contextos/UsuariosContext";
+import  secureLocalStorage  from  "react-secure-storage";
 
 const NavBar = () => {
 
@@ -20,6 +21,7 @@ const NavBar = () => {
       setEsAdmin(true)
     } 
     console.log(datosUsuario.roles=== '[ROLE_ADMIN]')
+    console.log("El número: ", secureLocalStorage.getItem("number"))
   }, [datosUsuario])  
 
   return (
@@ -30,6 +32,7 @@ const NavBar = () => {
             <NavLink to="/productos" >Productos</NavLink>
             <NavLink to="/usuarios" >Usuarios</NavLink>
             <NavLink to="/blog" >Blog</NavLink>
+            {}
             <NavLink to="/login">Login</NavLink>
         </Nav>
 
