@@ -1,4 +1,5 @@
-## dockerfile  document 
+## dockerfile  document para correr el archivo compilado 
+## del proyecto Reactjs + Vite en contenedor Docker con nginx
                                   
 # Usa una imagen base de Node.js
 FROM node:latest as build
